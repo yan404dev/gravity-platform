@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { SEOHead } from '@/components/SEOHead';
+import { SEOHead } from '@/components/seo-head';
 
 export default function NotFound() {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ export default function NotFound() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <SEOHead 
+      <SEOHead
         title="404 - Page Not Found"
         description="The page you're looking for doesn't exist. Return to discover events and community calendars."
       />
