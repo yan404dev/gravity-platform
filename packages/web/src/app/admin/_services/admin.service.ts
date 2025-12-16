@@ -10,7 +10,7 @@ export const adminService = {
             .select("role")
             .eq("user_id", userId)
             .eq("role", "admin")
-            .single();
+            .maybeSingle();
 
         if (error || !roles) return false;
         return true;

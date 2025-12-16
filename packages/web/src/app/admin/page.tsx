@@ -1,27 +1,17 @@
-import { redirect } from 'next/navigation';
-import { supabase } from '@/integrations/supabase/client';
-import { SEOHead } from '@/components/seo-head';
-import { AdminDashboard } from './_components/admin-dashboard';
-import { adminService } from './_services/admin.service';
-import { Event } from '../_types/event';
+"use client";
 
-export const revalidate = 0;
+import { SEOHead } from "@/components/seo-head";
+import { AdminDashboard } from "./_components/admin-dashboard";
+import { useAdminPage } from "./_hooks/use-admin-page";
 
-export default async function AdminPage() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+export default function AdminPage() {
+  const { isLoading, user, events } = useAdminPage();
 
-  if (!session) {
-    redirect('/auth');
+  if (isLoading) {
+    return <div className="min-h-screen flex items-center justify-center bg-white">Loading...</div>;
   }
 
-  const isAdmin = await adminService.isAdmin(session.user.id);
-  if (!isAdmin) {
-    redirect('/');
-  }
-
-  const { data: events } = await supabase.from('events').select('*');
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-white p-8">
@@ -30,8 +20,8 @@ export default async function AdminPage() {
         description="Manage events and content for your event platform"
       />
       <AdminDashboard
-        initialEvents={(events as Event[]) || []}
-        user={session.user}
+        initialEvents={events}
+        user={user}
       />
     </div>
   );
