@@ -19,7 +19,7 @@ export function useAdminPage() {
                 const { data: { session } } = await supabase.auth.getSession();
 
                 if (!session) {
-                    router.push("/auth");
+                    router.push("/");
                     return;
                 }
 
@@ -37,7 +37,7 @@ export function useAdminPage() {
                 }
             } catch (error) {
                 console.error("Auth check failed", error);
-                router.push("/auth");
+                router.push("/");
             } finally {
                 setIsLoading(false);
             }

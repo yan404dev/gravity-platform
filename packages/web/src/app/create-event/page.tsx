@@ -9,7 +9,7 @@ export default async function CreateEventPage() {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    redirect('/auth');
+    redirect('/');
   }
 
   return (

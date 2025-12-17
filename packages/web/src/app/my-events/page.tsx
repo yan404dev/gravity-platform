@@ -12,7 +12,7 @@ export default async function MyEventsPage() {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    redirect('/auth');
+    redirect('/');
   }
 
   // Parallel data fetching
