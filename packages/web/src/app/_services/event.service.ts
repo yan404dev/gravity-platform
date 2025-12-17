@@ -1,25 +1,13 @@
-import { supabase } from '@/integrations/supabase/client';
-import { Event, eventSchema } from '../_types/event';
-import { z } from 'zod';
+import { MOCK_EVENTS } from '@/lib/mock-data';
+import { Event } from '../_types/event';
 
 export const eventService = {
     async getAll(): Promise<Event[]> {
-        const { data, error } = await supabase
-            .from('events')
-            .select('id, title, date, time, background_image_url, target_date, address')
-            .order('target_date', { ascending: true });
+        // Return mock events
+        // In a real mock scenario, we might want to simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-        if (error) throw error;
-
-        // Validate data using Zod
-        try {
-            return z.array(eventSchema).parse(data);
-        } catch (validationError) {
-            console.error('Event data validation failed:', validationError);
-            // Fallback or rethrow depending on strictness. 
-            // For high quality, we might want to throw or filter invalid items.
-            // Here we parse and might let it throw if critical data is missing.
-            return [];
-        }
+        // Cast to Event[] - we assume mock data matches structure enough
+        return MOCK_EVENTS as unknown as Event[];
     }
 };

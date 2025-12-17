@@ -1,24 +1,22 @@
 import { redirect } from 'next/navigation';
 import { SEOHead } from '@/components/seo-head';
-import { supabase } from '@/integrations/supabase/client';
 import { MyEventsList } from './_components/my-events-list';
 import { myEventsService } from './_services/my-events.service';
+import { MOCK_USER } from '@/lib/mock-data';
 
 export const revalidate = 0;
 
 export default async function MyEventsPage() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const user = MOCK_USER;
 
-  if (!session) {
+  if (!user) {
     redirect('/');
   }
 
   // Parallel data fetching
   const [createdEvents, registeredEvents] = await Promise.all([
-    myEventsService.getCreatedEvents(session.user.id),
-    myEventsService.getRegisteredEvents(session.user.id),
+    myEventsService.getCreatedEvents(user.id),
+    myEventsService.getRegisteredEvents(user.id),
   ]);
 
   return (
@@ -28,7 +26,7 @@ export default async function MyEventsPage() {
         description="Manage your created events and view events you've registered for"
       />
       <MyEventsList
-        user={session.user}
+        user={user}
         initialCreatedEvents={createdEvents}
         initialRegisteredEvents={registeredEvents}
       />

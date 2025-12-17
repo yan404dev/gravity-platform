@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { User } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
+import { User } from "@/lib/mock-data";
+import { authService } from "@/services/auth.service";
 import { adminService } from "../_services/admin.service";
 import { Event } from "@/app/_types/event";
 
@@ -11,17 +10,16 @@ export function useAdminPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState<User | null>(null);
     const [events, setEvents] = useState<Event[]>([]);
-    const router = useRouter();
 
     useEffect(() => {
         const loadData = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await authService.getSession();
 
             if (session) {
                 setUser(session.user);
-                const { data } = await supabase.from("events").select("*");
+                const data = await adminService.getAllEvents();
                 if (data) {
-                    setEvents(data as Event[]);
+                    setEvents(data);
                 }
             }
             setIsLoading(false);

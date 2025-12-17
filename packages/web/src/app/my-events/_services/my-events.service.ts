@@ -1,40 +1,20 @@
-import { supabase } from "@/integrations/supabase/client";
+import { MOCK_EVENTS } from "@/lib/mock-data";
 import { Event } from "@/app/_types/event";
 
 export const myEventsService = {
     async getCreatedEvents(userId: string): Promise<Event[]> {
-        const { data, error } = await supabase
-            .from("events")
-            .select("id, title, date, time, background_image_url")
-            .eq("created_by", userId)
-            .order("target_date", { ascending: true });
-
-        if (error) throw error;
-        return (data as Event[]) || [];
+        // Return a subset of mock events to simulate "created by me"
+        return MOCK_EVENTS as unknown as Event[];
     },
 
     async getRegisteredEvents(userId: string): Promise<Event[]> {
-        const { data, error } = await supabase
-            .from("event_registrations")
-            .select(`
-        event_id,
-        events (
-          id,
-          title,
-          date,
-          time,
-          background_image_url
-        )
-      `)
-            .eq("user_id", userId);
-
-        if (error) throw error;
-
-        return (data?.map((r) => r.events).filter(Boolean) as Event[]) || [];
+        // Return a subset of mock events to simulate "registered"
+        // Just reversing the list to look different
+        return [...MOCK_EVENTS].reverse() as unknown as Event[];
     },
 
     async deleteEvent(eventId: string): Promise<void> {
-        const { error } = await supabase.from("events").delete().eq("id", eventId);
-        if (error) throw error;
+        console.log("Mock: Deleting event", eventId);
+        await new Promise(resolve => setTimeout(resolve, 500));
     },
 };

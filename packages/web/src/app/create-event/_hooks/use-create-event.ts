@@ -53,6 +53,12 @@ export function useCreateEvent({ user }: UseCreateEventProps) {
         });
     }, [onPlaceSelected, setValue]);
 
+    useEffect(() => {
+        if (startDate && !endDate) {
+            setEndDate(startDate);
+        }
+    }, [startDate, endDate]);
+
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
