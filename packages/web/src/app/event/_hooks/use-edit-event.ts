@@ -4,20 +4,18 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { useGooglePlacesAutocomplete } from "@/hooks/useGooglePlacesAutocomplete";
-import { supabase } from "@/integrations/supabase/client";
 import {
     EditEventFormData,
     editEventSchema,
 } from "../_schemas/edit-event.schema";
-import { eventOwnerService } from "../_services/event-owner.service";
-import { EventDetail } from "../_services/event-detail.service";
+import { Event } from "@/app/_types/event";
 
 interface UseEditEventProps {
-    event: EventDetail;
+    event: Event;
     user: User;
 }
 
@@ -45,7 +43,7 @@ export function useEditEvent({ event, user }: UseEditEventProps) {
         resolver: zodResolver(editEventSchema),
         defaultValues: {
             eventName: event.title,
-            description: event.description,
+            description: event.description || "",
             location: event.address,
             startTime: initialStartTime || "",
             endTime: initialEndTime || "",
@@ -82,7 +80,11 @@ export function useEditEvent({ event, user }: UseEditEventProps) {
             }
 
             try {
-                const publicUrl = await eventOwnerService.uploadImage(file);
+                // Mock upload
+                console.log("Mock: Uploading edit image", file.name);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                const publicUrl = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1000";
                 setImagePreview(publicUrl);
             } catch (error) {
                 toast.error("Failed to upload image");
@@ -99,13 +101,15 @@ export function useEditEvent({ event, user }: UseEditEventProps) {
 
         setIsSubmitting(true);
         try {
-            await eventOwnerService.updateEvent(event.id, {
+            console.log("Mock: Updating event", event.id, {
                 ...data,
                 date: format(startDate, "MMMM dd, yyyy"),
                 target_date: startDate.toISOString(),
                 background_image_url: imagePreview || event.background_image_url,
                 creator: user.id
             });
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
             toast.success("Event updated successfully");
             router.refresh();
         } catch (error) {
@@ -119,7 +123,9 @@ export function useEditEvent({ event, user }: UseEditEventProps) {
     const handleDelete = async () => {
         if (confirm("Are you sure you want to delete this event?")) {
             try {
-                await eventOwnerService.deleteEvent(event.id);
+                console.log("Mock: Deleting event", event.id);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
                 toast.success("Event deleted");
                 router.push("/my-events");
             } catch (error) {

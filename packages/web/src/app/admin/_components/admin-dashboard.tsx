@@ -3,7 +3,7 @@
 import { Navbar } from "@/components/navbar";
 import { Event } from "@/app/_types/event";
 import { EventEditForm } from "./event-edit-form";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { useAdminDashboard } from "../_hooks/use-admin-dashboard";
 
 interface AdminDashboardProps {

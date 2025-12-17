@@ -1,9 +1,9 @@
-import { eventDetailService } from '../_services/event-detail.service';
 import { EventView } from '../_components/event-view';
 import { SEOHead } from '@/components/seo-head';
 import { Navbar } from '@/components/navbar';
 import Link from 'next/link';
-import { supabase } from '@/integrations/supabase/client';
+import { MOCK_EVENTS, MOCK_USER } from '@/lib/mock-data';
+import { Event } from '../_types/event';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -13,7 +13,7 @@ export const revalidate = 0; // Dynamic for auth check
 
 export default async function EventPage({ params }: PageProps) {
   const { id } = await params;
-  const event = await eventDetailService.getEventById(id);
+  const event = MOCK_EVENTS.find(e => e.id === id) as unknown as Event;
 
   if (!event) {
     return (
@@ -39,12 +39,13 @@ export default async function EventPage({ params }: PageProps) {
     );
   }
 
-  const { data: { session } } = await supabase.auth.getSession();
+  const user = MOCK_USER;
   let isRegistered = false;
 
-  if (session?.user) {
-    isRegistered = await eventDetailService.getRegistrationStatus(id, session.user.id);
+  if (user) {
+    // Mock registration check
+    isRegistered = false; // Could check a mock registrations array
   }
 
-  return <EventView event={event} user={session?.user || null} initialIsRegistered={isRegistered} />;
+  return <EventView event={event} user={user} initialIsRegistered={isRegistered} />;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { Navbar } from "@/components/navbar";
 import { EventCountdown } from "@/components/event-countdown";
 import { EventMeta } from "@/components/event-meta";
@@ -11,11 +11,11 @@ import { EventLocation } from "@/components/event-location";
 import { EventRegistration } from "@/components/event-registration";
 import { AuthSheet } from "@/components/auth-sheet";
 import { SEOHead } from "@/components/seo-head";
-import { EventDetail } from "../_services/event-detail.service";
 import { useEventView } from "../_hooks/use-event-view";
+import { Event } from "@/app/_types/event";
 
 interface EventViewProps {
-    event: EventDetail;
+    event: Event;
     user: User | null;
     initialIsRegistered: boolean;
 }
@@ -44,7 +44,7 @@ export function EventView({
         <>
             <SEOHead
                 title={event.title}
-                description={event.description.substring(0, 160)}
+                description={(event.description || '').substring(0, 160)}
                 image={event.background_image_url}
                 keywords={`event, ${event.title}, ${event.address}, community event`}
             />
@@ -80,10 +80,10 @@ export function EventView({
                     <div className="flex w-full flex-col items-start gap-10 relative p-10 pb-24 max-lg:w-full max-lg:px-4 max-lg:py-6 max-lg:pb-6 max-lg:gap-8 opacity-0 animate-fade-in [animation-delay:200ms]">
                         <div className="flex flex-col items-start gap-4 self-stretch relative">
                             <EventMeta date={event.date} time={event.time} />
-                            <EventHeader title={event.title} creator={event.creator} />
+                            <EventHeader title={event.title} creator={event.creator || 'Unknown'} />
                         </div>
 
-                        <EventDescription description={event.description} />
+                        <EventDescription description={event.description || ''} />
 
                         <EventLocation
                             address={event.address}

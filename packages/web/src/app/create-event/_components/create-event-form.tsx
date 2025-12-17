@@ -1,7 +1,7 @@
 "use client";
 
 import { Navbar } from "@/components/navbar";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { EventForm } from "@/components/event-form/event-form";
 import { useCreateEvent } from "../_hooks/use-create-event";
 

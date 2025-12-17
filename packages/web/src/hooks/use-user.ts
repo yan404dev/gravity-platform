@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { User } from "@/lib/mock-data";
-import { authService } from "@/services/auth.service";
+import { authService } from "@/lib/auth-store";
 
 export function useUser() {
     const [user, setUser] = useState<User | null>(null);

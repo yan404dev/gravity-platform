@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Event } from "@/app/_types/event";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { useEventEditForm } from "../_hooks/use-admin-dashboard";
 
 interface EventEditFormProps {

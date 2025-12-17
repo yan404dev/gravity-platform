@@ -8,6 +8,8 @@ export const eventSchema = z.object({
     background_image_url: z.string().url(),
     target_date: z.string(),
     address: z.string(),
+    description: z.string().optional(),
+    creator: z.string().optional(),
 });
 
 export type Event = z.infer<typeof eventSchema>;

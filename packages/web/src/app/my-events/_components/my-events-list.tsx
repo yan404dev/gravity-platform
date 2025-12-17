@@ -5,7 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { useMyEvents } from "../_hooks/use-my-events";
 import { useSlidingTabs } from "../_hooks/use-sliding-tabs";
 import { Event } from "@/app/_types/event";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { EventCard } from "./event-card";
 
 interface MyEventsListProps {

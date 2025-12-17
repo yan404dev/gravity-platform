@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 import { SEOHead } from '@/components/seo-head';
 import { MyEventsList } from './_components/my-events-list';
-import { myEventsService } from './_services/my-events.service';
-import { MOCK_USER } from '@/lib/mock-data';
+import { MOCK_USER, MOCK_EVENTS } from '@/lib/mock-data';
+import { Event } from '@/app/_types/event';
 
 export const revalidate = 0;
 
@@ -13,11 +13,9 @@ export default async function MyEventsPage() {
     redirect('/');
   }
 
-  // Parallel data fetching
-  const [createdEvents, registeredEvents] = await Promise.all([
-    myEventsService.getCreatedEvents(user.id),
-    myEventsService.getRegisteredEvents(user.id),
-  ]);
+  // Mock filtering
+  const createdEvents = MOCK_EVENTS.filter(e => e.creator === user.id) as unknown as Event[];
+  const registeredEvents = [] as Event[];
 
   return (
     <>

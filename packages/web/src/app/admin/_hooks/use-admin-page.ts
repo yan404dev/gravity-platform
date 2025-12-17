@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { User } from "@/lib/mock-data";
-import { authService } from "@/services/auth.service";
-import { adminService } from "../_services/admin.service";
+import { User, MOCK_EVENTS } from "@/lib/mock-data";
+import { authService } from "@/lib/auth-store";
 import { Event } from "@/app/_types/event";
 
 export function useAdminPage() {
@@ -17,10 +16,9 @@ export function useAdminPage() {
 
             if (session) {
                 setUser(session.user);
-                const data = await adminService.getAllEvents();
-                if (data) {
-                    setEvents(data);
-                }
+                // Simulate fetch delay
+                await new Promise(resolve => setTimeout(resolve, 500));
+                setEvents(MOCK_EVENTS as unknown as Event[]);
             }
             setIsLoading(false);
         };

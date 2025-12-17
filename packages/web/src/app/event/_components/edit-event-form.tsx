@@ -1,16 +1,17 @@
 "use client";
 
 import { useEditEvent } from "../_hooks/use-edit-event";
-import { Registrant, EventDetail } from "@/types/event.types"; // Updated import
-import { User } from "@supabase/supabase-js";
+import { Registrant } from "@/types/event.types";
+import { User } from "@/lib/mock-data";
 import { Navbar } from "@/components/navbar";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 import { EventForm } from "@/components/event-form/event-form";
+import { Event } from "@/app/_types/event";
 
 interface EditEventFormProps {
-    event: EventDetail;
+    event: Event;
     user: User;
     registrants: Registrant[];
 }

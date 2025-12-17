@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { toast } from "sonner";
-import { eventDetailService } from "../_services/event-detail.service";
 
 interface UseEventViewProps {
     eventId: string;
@@ -39,14 +38,16 @@ export function useEventView({
 
         setLoading(true);
         try {
+            await new Promise(resolve => setTimeout(resolve, 500));
+
             if (isRegistered) {
-                await eventDetailService.unregisterUser(eventId, user.id);
+                // Mock Unregister
                 setIsRegistered(false);
                 toast.success("Unregistered", {
                     description: "You have been unregistered from this event",
                 });
             } else {
-                await eventDetailService.registerUser(eventId, user.id);
+                // Mock Register
                 setIsRegistered(true);
                 toast.success("Registered!", {
                     description: "You have successfully registered for this event",

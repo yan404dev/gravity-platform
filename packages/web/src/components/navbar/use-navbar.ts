@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { User } from '@supabase/supabase-js';
-import { authService } from '@/services/auth.service';
+import { User } from '@/lib/mock-data';
+import { authService } from '@/lib/auth-store';
 
 export const useNavbar = () => {
     const [user, setUser] = useState<User | null>(null);

@@ -5,11 +5,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/lib/mock-data";
 import { useGooglePlacesAutocomplete } from "@/hooks/useGooglePlacesAutocomplete";
 import { CreateEventFormData, createEventSchema } from "../_schemas/create-event.schema";
-import { storageService } from "../_services/storage.service";
-import { createEventService } from "../_services/create-event.service";
 
 interface UseCreateEventProps {
     user: User;
@@ -112,18 +110,10 @@ export function useCreateEvent({ user }: UseCreateEventProps) {
         setIsSubmitting(true);
 
         try {
-            const imageUrl = await storageService.uploadEventImage(imageFile);
+            console.log("Mock: Creating event", { ...data, startDate, endDate, imagePreview, user });
 
-            await createEventService.createEvent({
-                eventName: data.eventName,
-                description: data.description,
-                startDate: startDate!,
-                startTime: data.startTime,
-                endTime: data.endTime,
-                location: data.location,
-                imageUrl: imagePreview || "",
-                user: user
-            });
+            // Simulating API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
             toast.success("Event created successfully!");
             router.push("/my-events");

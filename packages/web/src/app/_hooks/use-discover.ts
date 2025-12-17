@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Event } from "../_types/event";
-import { locationService } from "../_services/location.service";
 
 interface UseDiscoverProps {
     initialEvents: Event[];
@@ -19,7 +18,17 @@ export function useDiscover({ initialEvents }: UseDiscoverProps) {
 
     useEffect(() => {
         // Detect country on mount
-        locationService.getUserCountry().then(setUserCountry);
+        const getCountry = async () => {
+            try {
+                // Mocking country detection or using a public API
+                // For simplicity in mocked version:
+                setUserCountry('Mock Country');
+            } catch (error) {
+                console.error('Error detecting country:', error);
+                setUserCountry('the world');
+            }
+        };
+        getCountry();
     }, []);
 
     useEffect(() => {
