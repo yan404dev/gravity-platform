@@ -3,61 +3,67 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-enum AppRole {
-  admin
-  user
+model User {
+  id Int @id @default(autoincrement())
 
-  @@map("app_role")
+  email    String
+  password String
+  active   Boolean @default(false)
+  settings Json    @default("{}")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
+
+  currentProfileId Int @map("current_profile_id")
+
+  currentProfile Profile       @relation("UserCurrentProfiles", fields: [currentProfileId], references: [id])
+  userProfiles   UserProfile[]
+
+  @@index([email], name: "users_email")
+  @@index([currentProfileId], name: "users_current_profile_id")
+  @@map("users")
+}
+
+model UserProfile {
+  id Int @id @default(autoincrement())
+
+  userId    Int @map("user_id")
+  profileId Int @map("profile_id")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
+  expiresAt DateTime? @map("expires_at") @db.Timestamp(6)
+
+  user    User    @relation(fields: [userId], references: [id])
+  profile Profile @relation(fields: [profileId], references: [id])
+
+  @@index([userId, profileId], name: "users_profiles_user_id_profile_id")
+  @@index([profileId, userId], name: "users_profiles_profile_id_user_id")
+  @@map("users_profiles")
 }
 
 model Profile {
-  id          String   @id @default(uuid())
-  userId      String   @unique @map("user_id")
-  displayName String?  @map("display_name")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id Int @id @default(autoincrement())
 
+  name     String
+  document String?
+  email    String?
+  phone    String?
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
+
+  userProfiles        UserProfile[]
+  userCurrentProfiles User[]        @relation("UserCurrentProfiles")
+
+  @@index([document], name: "profiles_document")
+  @@index([email], name: "profiles_email")
   @@map("profiles")
-}
-
-model UserRole {
-  id        String   @id @default(uuid())
-  userId    String   @map("user_id")
-  role      AppRole
-  createdAt DateTime? @default(now()) @map("created_at")
-
-  @@map("user_roles")
-}
-
-model Event {
-  id                 String              @id @default(uuid())
-  title              String
-  description        String
-  date               DateTime            @db.Date
-  time               DateTime            @db.Time
-  location           String              @map("address")
-  backgroundImageUrl String              @map("background_image_url")
-  targetDate         DateTime            @map("target_date")
-  creatorId          String              @map("creator")
-  createdBy          String?             @map("created_by") // Seems redundant with creator, but keeping as per types
-  
-  registrations      EventRegistration[]
-
-  @@map("events")
-}
-
-model EventRegistration {
-  id           String   @id @default(uuid())
-  eventId      String   @map("event_id")
-  userId       String   @map("user_id")
-  registeredAt DateTime @default(now()) @map("registered_at")
-  
-  event        Event    @relation(fields: [eventId], references: [id])
-
-  @@map("event_registrations")
 }

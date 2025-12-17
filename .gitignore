@@ -43,3 +43,6 @@ next-env.d.ts
 .idea
 *.swp
 *.swo
+
+# Docker data directories
+.docker
