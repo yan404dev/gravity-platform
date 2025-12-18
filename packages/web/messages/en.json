@@ -1,0 +1,60 @@
+{
+  "Common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "Navbar": {
+    "createEvent": "Create Event",
+    "myEvents": "My Events",
+    "admin": "Admin",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "Discover": {
+    "browse": "BROWSE",
+    "discover": "Discover",
+    "events": "events",
+    "near": "near",
+    "you": "you",
+    "subheading": "Explore popular events near you, browse by category, or check out some of the great community calendars.",
+    "browsingIn": "Browsing events in",
+    "pickDate": "Pick a date",
+    "noEvents": "No events found"
+  },
+  "CreateEvent": {
+    "title": "Create Event",
+    "submit": "CREATE EVENT",
+    "submitting": "CREATING...",
+    "eventName": "Event name",
+    "start": "Start",
+    "end": "End",
+    "location": "Add event location",
+    "description": "Add description",
+    "addImage": "ADD IMAGE",
+    "dropImage": "DROP IMAGE HERE",
+    "changeImage": "Change Image"
+  },
+  "MyEvents": {
+    "title": "My Events",
+    "created": "Created by me",
+    "registered": "Registered",
+    "noCreated": "You haven't created any events yet",
+    "noRegistered": "You haven't registered for any events yet",
+    "updating": "Updating..."
+  },
+  "EventCard": {
+    "liveNow": "LIVE NOW"
+  },
+  "EventView": {
+    "loading": "LOADING...",
+    "eventEnded": "EVENT ENDED",
+    "unregister": "UNREGISTER",
+    "register": "REGISTER",
+    "about": "ABOUT THIS EVENT",
+    "by": "BY",
+    "location": "LOCATION",
+    "getDirections": "GET DIRECTIONS",
+    "live": "LIVE"
+  }
+}
