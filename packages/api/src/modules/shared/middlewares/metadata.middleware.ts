@@ -19,7 +19,7 @@ export class MetadataMiddleware implements NestMiddleware {
 
     this.logger.log(`Iniciando endpoint: ${url}`);
 
-    const xPerfilAtualId = req.headers['x-perfil-atual-id'];
+    const xCurrentProfileId = req.headers['x-current-profile-id'];
     const xRealIp = req.headers['x-real-ip'];
     const xTimezone = req.headers['x-timezone'];
     const userAgent = req.headers['user-agent'];
@@ -30,8 +30,8 @@ export class MetadataMiddleware implements NestMiddleware {
       [USER_AGENT_CONSTANT]: userAgent,
       [X_TIMEZONE_CONSTANT]: xTimezone,
       [X_CURRENT_PROFILE_ID_CONSTANT]:
-        xPerfilAtualId && !Number.isNaN(Number(xPerfilAtualId))
-          ? Number(xPerfilAtualId)
+        xCurrentProfileId && !Number.isNaN(Number(xCurrentProfileId))
+          ? Number(xCurrentProfileId)
           : undefined,
       [IP_ADDRESS_CONSTANT]: xRealIp ? String(xRealIp) : undefined,
       [ACCESS_TOKEN_CONSTANT]: token ? String(token) : undefined,
