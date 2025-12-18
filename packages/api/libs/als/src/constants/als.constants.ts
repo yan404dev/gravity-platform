@@ -7,4 +7,4 @@ export const IP_ADDRESS_CONSTANT = 'ip-address';
 //
 export const X_TRACE_ID_CONSTANT = 'x-trace-id';
 export const X_TIMEZONE_CONSTANT = 'x-timezone';
-export const X_PROFILE_ID_CONSTANT = 'x-profile-id';
+export const X_CURRENT_PROFILE_ID_CONSTANT = 'x-current-profile-id';
