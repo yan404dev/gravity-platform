@@ -43,6 +43,7 @@ model UserProfile {
   user    User    @relation(fields: [userId], references: [id])
   profile Profile @relation(fields: [profileId], references: [id])
 
+  @@unique([userId, profileId], name: "users_profiles_user_id_profile_id_unique")
   @@index([userId, profileId], name: "users_profiles_user_id_profile_id")
   @@index([profileId, userId], name: "users_profiles_profile_id_user_id")
   @@map("users_profiles")
@@ -56,14 +57,157 @@ model Profile {
   email    String?
   phone    String?
 
+  category String?
+  privacy  ProfilePrivacy @default(PUBLIC)
+
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
   deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
 
   userProfiles        UserProfile[]
-  userCurrentProfiles User[]        @relation("UserCurrentProfiles")
+  userCurrentProfiles User[]          @relation("UserCurrentProfiles")
+  eventAttendees      EventAttendee[]
+
+  // Profile event relationships
+  eventsCreateds Event[] @relation("ProfileEventsCreated")
+  eventsUpdateds Event[] @relation("ProfileEventsUpdated")
+  eventsDeleteds Event[] @relation("ProfileEventsDeleted")
+
+  // Event attendee relationships
+  eventsAttendeeCreateds EventAttendee[] @relation("ProfileEventAttendeesCreated")
+  eventsAttendeeUpdateds EventAttendee[] @relation("ProfileEventAttendeesUpdated")
+  eventsAttendeeDeleteds EventAttendee[] @relation("ProfileEventAttendeesDeleted")
+
+  // Event review relationships
+  eventReviewsCreateds EventReview[] @relation("ProfileEventReviewsCreated")
+  eventReviewsUpdateds EventReview[] @relation("ProfileEventReviewsUpdated")
+  eventReviewsDeleteds EventReview[] @relation("ProfileEventReviewsDeleted")
+
+  eventReviews EventReview[]
 
   @@index([document], name: "profiles_document")
   @@index([email], name: "profiles_email")
   @@map("profiles")
+}
+
+model Event {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+
+  startDate DateTime @map("start_date") @db.Timestamp(6)
+  endDate   DateTime @map("end_date") @db.Timestamp(6)
+
+  latitude  Float
+  longitude Float
+
+  status EventStatus @default(DRAFT)
+
+  thumbnailUrl String?  @map("thumbnail_url")
+  bannerUrl    String?  @map("banner_url")
+  tags         String[] // PostgreSQL array
+  timezone     String   @default("America/Sao_Paulo")
+
+  city    String
+  address String
+  number  String?
+
+  price Decimal @db.Decimal(10, 2)
+
+  createdById Int  @map("created_by_id")
+  updatedById Int? @map("updated_by_id")
+  deletedById Int? @map("deleted_by_id")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
+
+  createdBy Profile  @relation("ProfileEventsCreated", fields: [createdById], references: [id])
+  updatedBy Profile? @relation("ProfileEventsUpdated", fields: [updatedById], references: [id])
+  deletedBy Profile? @relation("ProfileEventsDeleted", fields: [deletedById], references: [id])
+
+  eventAttendees EventAttendee[]
+  eventReviews   EventReview[]
+
+  @@index([startDate, endDate], name: "events_date_range")
+  @@index([city], name: "events_city")
+  @@index([address], name: "events_address")
+  @@index([latitude, longitude], name: "events_location")
+  @@index([createdById], name: "events_created_by_id")
+  @@index([updatedById], name: "events_updated_by_id")
+  @@index([deletedById], name: "events_deleted_by_id")
+  @@map("events")
+}
+
+model EventAttendee {
+  id        Int @id @default(autoincrement())
+  eventId   Int @map("event_id")
+  profileId Int @map("profile_id")
+
+  createdById Int  @map("created_by_id")
+  updatedById Int? @map("updated_by_id")
+  deletedById Int? @map("deleted_by_id")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
+
+  createdBy Profile  @relation("ProfileEventAttendeesCreated", fields: [createdById], references: [id])
+  updatedBy Profile? @relation("ProfileEventAttendeesUpdated", fields: [updatedById], references: [id])
+  deletedBy Profile? @relation("ProfileEventAttendeesDeleted", fields: [deletedById], references: [id])
+
+  event   Event   @relation(fields: [eventId], references: [id])
+  profile Profile @relation(fields: [profileId], references: [id])
+
+  @@unique([eventId, profileId], name: "event_attendees_event_id_profile_id_unique")
+  @@index([eventId], name: "event_attendees_event_id")
+  @@index([profileId], name: "event_attendees_profile_id")
+  @@index([createdById], name: "event_attendees_created_by_id")
+  @@index([updatedById], name: "event_attendees_updated_by_id")
+  @@index([deletedById], name: "event_attendees_deleted_by_id")
+  @@map("events_attendees")
+}
+
+model EventReview {
+  id        Int     @id @default(autoincrement())
+  eventId   Int     @map("event_id")
+  profileId Int     @map("profile_id")
+  rating    Int // 1-5
+  comment   String?
+
+  createdById Int  @map("created_by_id")
+  updatedById Int? @map("updated_by_id")
+  deletedById Int? @map("deleted_by_id")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(6)
+
+  createdBy Profile  @relation("ProfileEventReviewsCreated", fields: [createdById], references: [id])
+  updatedBy Profile? @relation("ProfileEventReviewsUpdated", fields: [updatedById], references: [id])
+  deletedBy Profile? @relation("ProfileEventReviewsDeleted", fields: [deletedById], references: [id])
+
+  event   Event   @relation(fields: [eventId], references: [id])
+  profile Profile @relation(fields: [profileId], references: [id])
+
+  @@unique([eventId, profileId], name: "event_reviews_event_id_profile_id_unique")
+  @@index([eventId, rating], name: "event_reviews_event_rating")
+  @@index([profileId], name: "event_reviews_profile_id")
+  @@map("events_reviews")
+}
+
+enum ProfilePrivacy {
+  PUBLIC  @map("public")
+  PRIVATE @map("private")
+
+  @@map("profile_privacy")
+}
+
+enum EventStatus {
+  DRAFT     @map("draft")
+  PUBLISHED @map("published")
+  CANCELLED @map("cancelled")
+  COMPLETED @map("completed")
+
+  @@map("event_status")
 }
