@@ -1,15 +1,14 @@
 "use client";
 
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@supabase/supabase-js";
+import { User, MOCK_EVENTS } from "@/lib/mock-data";
 import { useToast } from "@/hooks/use-toast";
 import { Event } from "@/app/_types/event";
 import { EventEditFormData, eventEditSchema } from "../_schemas/event-edit.schema";
-import { adminService } from "../_services/admin.service";
-import { supabase } from "@/integrations/supabase/client";
+import { authService } from "@/lib/auth-store";
 
 interface UseAdminDashboardProps {
     initialEvents: Event[];
@@ -25,15 +24,14 @@ export function useAdminDashboard({ initialEvents, user }: UseAdminDashboardProp
     const { toast } = useToast();
 
     const handleSignOut = async () => {
-        await supabase.auth.signOut();
-        router.push("/auth");
+        await authService.signOut();
+        window.location.href = "/";
     };
 
     const refreshEvents = async () => {
-        const data = await adminService.getAllEvents();
-        if (data) {
-            setEvents(data);
-        }
+        // Mock refresh
+        await new Promise(resolve => setTimeout(resolve, 500));
+        setEvents(MOCK_EVENTS as unknown as Event[]);
     };
 
     return {
@@ -87,7 +85,11 @@ export function useEventEditForm({
 
         setUploading(true);
         try {
-            const publicUrl = await adminService.uploadImage(file, user.id, event.id);
+            console.log("Mock: Uploading admin image", file.name);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Return dummy URL
+            const publicUrl = "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=1000";
+
             setCurrentImageUrl(publicUrl);
             toast({ title: "Success", description: "Image uploaded" });
         } catch (error: any) {
@@ -99,10 +101,9 @@ export function useEventEditForm({
 
     const onSubmit = async (data: EventEditFormData) => {
         try {
-            await adminService.updateEvent(event.id, {
-                ...data,
-                background_image_url: currentImageUrl,
-            });
+            console.log("Mock: Updating event", event.id, data);
+            await new Promise(resolve => setTimeout(resolve, 500));
+
             toast({ title: "Success", description: "Event saved" });
             onSuccess();
         } catch (error: any) {

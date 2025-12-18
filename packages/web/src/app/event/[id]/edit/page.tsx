@@ -1,9 +1,8 @@
 import { redirect } from "next/navigation";
-import { supabase } from "@/integrations/supabase/client";
-import { eventDetailService } from "../../_services/event-detail.service";
-import { eventOwnerService } from "../../_services/event-owner.service";
 import { EditEventForm } from "../../_components/edit-event-form";
 import { SEOHead } from "@/components/seo-head";
+import { MOCK_EVENTS, MOCK_USER } from "@/lib/mock-data";
+import { Event } from "@/app/_types/event";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -14,21 +13,19 @@ export const revalidate = 0; // Dynamic for auth/ownership checks
 export default async function EditEventPage({ params }: PageProps) {
   const { id } = await params;
 
-  // 1. Auth Check
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  // 1. Auth Check - Mocked
+  const user = MOCK_USER;
 
-  if (!session?.user) {
-    redirect("/auth");
+  if (!user) {
+    redirect("/");
   }
 
-  // 2. Data Fetching (Parallel)
-  const [event, registrants, isOwner] = await Promise.all([
-    eventDetailService.getEventById(id),
-    eventOwnerService.getRegistrants(id),
-    eventOwnerService.verifyOwnership(id, session.user.id),
-  ]);
+  // 2. Data Fetching (Mock)
+  const event = MOCK_EVENTS.find(e => e.id === id) as unknown as Event;
+
+  // Mock registrants and owner check
+  const registrants: any[] = [];
+  const isOwner = true; // Always owner in mock mode
 
   // 3. Validation
   if (!event) {
@@ -47,7 +44,7 @@ export default async function EditEventPage({ params }: PageProps) {
       <SEOHead title="Edit Event" description="Update your event details" />
       <EditEventForm
         event={event}
-        user={session.user}
+        user={user}
         registrants={registrants}
       />
     </>

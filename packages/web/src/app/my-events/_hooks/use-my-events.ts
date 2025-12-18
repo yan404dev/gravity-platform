@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { User } from "@supabase/supabase-js";
+import { User, MOCK_EVENTS } from "@/lib/mock-data";
 import { toast } from "sonner";
 import { Event } from "@/app/_types/event";
-import { myEventsService } from "../_services/my-events.service";
 
 interface MyEventsState {
     createdEvents: Event[];
@@ -26,21 +25,19 @@ export function useMyEvents({
     const [state, setState] = useState<MyEventsState>({
         createdEvents: initialCreatedEvents,
         registeredEvents: initialRegisteredEvents,
-        loading: false, // Initial state is loaded from server
+        loading: false,
     });
 
     const refreshEvents = async () => {
         if (!user) return;
         setState((prev) => ({ ...prev, loading: true }));
         try {
-            const [created, registered] = await Promise.all([
-                myEventsService.getCreatedEvents(user.id),
-                myEventsService.getRegisteredEvents(user.id),
-            ]);
+            // Mock refresh
+            await new Promise(resolve => setTimeout(resolve, 500));
 
             setState({
-                createdEvents: created,
-                registeredEvents: registered,
+                createdEvents: MOCK_EVENTS as unknown as Event[],
+                registeredEvents: [...MOCK_EVENTS].reverse() as unknown as Event[],
                 loading: false,
             });
         } catch (error) {
@@ -51,9 +48,18 @@ export function useMyEvents({
 
     const handleDeleteEvent = async (eventId: string) => {
         try {
-            await myEventsService.deleteEvent(eventId);
+            // Mock delete
+            console.log("Mock: Deleting", eventId);
+            await new Promise(resolve => setTimeout(resolve, 500));
+
             toast.success("Event deleted successfully");
-            refreshEvents();
+
+            // Optimistic update or refresh
+            setState(prev => ({
+                ...prev,
+                createdEvents: prev.createdEvents.filter(e => e.id !== eventId)
+            }));
+
         } catch (error) {
             console.error("Error deleting event:", error);
             toast.error("Failed to delete event");

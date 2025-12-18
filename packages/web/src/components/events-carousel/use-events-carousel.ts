@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { eventsCarouselService } from './events-carousel.service';
+import { MOCK_EVENTS } from '@/lib/mock-data';
 
 export interface Event {
     id: string;
@@ -17,15 +17,17 @@ export const useEventsCarousel = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const fetchEvents = async () => {
-            const { data, error } = await eventsCarouselService.getCarouselEvents();
+        // Use Mock Data
+        const mappedEvents = MOCK_EVENTS.map(e => ({
+            id: e.id,
+            title: e.title,
+            background_image_url: e.background_image_url,
+            address: e.address,
+            date: e.date,
+            time: e.time
+        }));
 
-            if (data && !error) {
-                setEvents(data);
-            }
-        };
-
-        fetchEvents();
+        setEvents(mappedEvents);
     }, []);
 
     const handleEventClick = (id: string) => {

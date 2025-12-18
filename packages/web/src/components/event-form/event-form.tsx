@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
@@ -42,21 +43,59 @@ export function EventForm({
     extraContent
 }: EventFormProps) {
     const { register, formState: { errors } } = form;
+    const [isDragging, setIsDragging] = useState(false);
 
     return (
         <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
             <div className="flex flex-col gap-3 md:gap-4">
-                <label className="w-full aspect-[4/3] border border-black bg-[#D9D9D9] flex items-center justify-center cursor-pointer hover:bg-[#CECECE] transition-colors">
+                <label
+                    className={cn(
+                        "w-full aspect-[4/3] border border-black bg-[#D9D9D9] flex flex-col items-center justify-center cursor-pointer transition-colors relative overflow-hidden group",
+                        isDragging ? "bg-[#CECECE] border-dashed border-2" : "hover:bg-[#CECECE]"
+                    )}
+                    onDragOver={(e) => {
+                        e.preventDefault();
+                        setIsDragging(true);
+                    }}
+                    onDragLeave={() => setIsDragging(false)}
+                    onDrop={(e) => {
+                        e.preventDefault();
+                        setIsDragging(false);
+                        const file = e.dataTransfer.files?.[0];
+                        if (file && fileInputRef.current) {
+                            const dataTransfer = new DataTransfer();
+                            dataTransfer.items.add(file);
+                            fileInputRef.current.files = dataTransfer.files;
+
+                            const event = new Event('change', { bubbles: true });
+                            fileInputRef.current.dispatchEvent(event);
+                        }
+                    }}
+                >
                     {imagePreview ? (
-                        <img
-                            src={imagePreview}
-                            alt="Event preview"
-                            className="w-full h-full object-cover"
-                        />
+                        <>
+                            <img
+                                src={imagePreview}
+                                alt="Event preview"
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span className="bg-white px-3 py-1 text-[11px] font-medium uppercase tracking-wider border border-black">
+                                    Change Image
+                                </span>
+                            </div>
+                        </>
                     ) : (
-                        <span className="text-black text-[11px] font-medium uppercase tracking-wider">
-                            ADD IMAGE
-                        </span>
+                        <div className="flex flex-col items-center gap-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            <span className="text-black text-[11px] font-medium uppercase tracking-wider">
+                                {isDragging ? "DROP IMAGE HERE" : "ADD IMAGE"}
+                            </span>
+                        </div>
                     )}
                     <input
                         ref={fileInputRef}
@@ -67,16 +106,18 @@ export function EventForm({
                     />
                 </label>
 
-                {imagePreview && (
-                    <button
-                        onClick={() => fileInputRef.current?.click()}
-                        className="px-4 py-3 text-[13px] font-medium uppercase tracking-wider border border-black bg-white hover:bg-black hover:text-white transition-colors"
-                        type="button"
-                    >
-                        Change image
-                    </button>
-                )}
-            </div>
+                {
+                    imagePreview && (
+                        <button
+                            onClick={() => fileInputRef.current?.click()}
+                            className="px-4 py-3 text-[13px] font-medium uppercase tracking-wider border border-black bg-white hover:bg-black hover:text-white transition-colors"
+                            type="button"
+                        >
+                            Change image
+                        </button>
+                    )
+                }
+            </div >
 
             <div className="space-y-4 md:space-y-6">
                 <div>
@@ -123,8 +164,7 @@ export function EventForm({
                             </PopoverContent>
                         </Popover>
                         <input
-                            type="text"
-                            placeholder="15:00"
+                            type="time"
                             className="px-2 md:px-4 py-2 md:py-3 text-[14px] md:text-[17px] text-black text-center focus:outline-none placeholder:text-[#C4C4C4]"
                             {...register("startTime")}
                         />
@@ -161,8 +201,7 @@ export function EventForm({
                             </PopoverContent>
                         </Popover>
                         <input
-                            type="text"
-                            placeholder="16:00"
+                            type="time"
                             className="px-2 md:px-4 py-2 md:py-3 text-[14px] md:text-[17px] text-black text-center focus:outline-none placeholder:text-[#C4C4C4]"
                             {...register("endTime")}
                         />
@@ -220,6 +259,6 @@ export function EventForm({
                     {children}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

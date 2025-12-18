@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
-import { authService } from '@/services/auth.service';
+import { authService } from '@/lib/auth-store';
 import { authSchema, AuthFormData } from './auth.schema';
 
 export const useAuthSheet = (onClose: () => void) => {
