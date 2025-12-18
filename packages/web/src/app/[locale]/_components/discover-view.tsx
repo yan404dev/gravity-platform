@@ -1,34 +1,39 @@
 "use client";
 
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { EventsCarousel } from '@/components/events-carousel';
 import { useDiscover } from '../_hooks/use-discover';
 import { EventCard } from './event-card';
 import { Event } from '../_types/event';
-// import { CategoryFilter } from '../../components/CategoryFilter';
+import dynamic from 'next/dynamic';
+import { useTranslations } from 'next-intl';
+
+const EventsCarousel = dynamic(() => import('@/components/events-carousel').then(mod => mod.EventsCarousel), {
+    loading: () => <div className="w-full h-[500px] bg-gray-100 animate-pulse" />,
+    ssr: false
+});
 
 interface DiscoverViewProps {
     initialEvents: Event[];
 }
 
-import { useTranslations } from 'next-intl';
+import { AnimatedEventCard } from './animated-event-card';
 
 export function DiscoverView({ initialEvents }: DiscoverViewProps) {
     const t = useTranslations('Discover');
     const { date, setDate, userCountry, filteredEvents } = useDiscover({ initialEvents });
 
-    const scrollToEvents = () => {
+    const scrollToEvents = useCallback(() => {
         const eventsSection = document.getElementById('events-section');
         eventsSection?.scrollIntoView({
             behavior: 'smooth'
         });
-    };
+    }, []);
 
     return (
         <div className="min-h-screen bg-white">
@@ -103,13 +108,11 @@ export function DiscoverView({ initialEvents }: DiscoverViewProps) {
                                 </div>
                             ) : (
                                 filteredEvents.map((event, index) => (
-                                    <div
+                                    <AnimatedEventCard
                                         key={event.id}
-                                        className="animate-fade-in"
-                                        style={{ animationDelay: `${1.0 + (index * 0.1)}s`, animationFillMode: 'both' }}
-                                    >
-                                        <EventCard event={event} />
-                                    </div>
+                                        event={event}
+                                        index={index}
+                                    />
                                 ))
                             )}
                         </div>

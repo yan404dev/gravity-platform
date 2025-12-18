@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { Trash2 } from "lucide-react";
 import { Event } from "../../_types/event";
 
@@ -11,24 +11,26 @@ interface EventCardProps {
     onDelete?: (id: string) => void;
 }
 
-export const EventCard = ({ event, isCreated, onDelete }: EventCardProps) => {
+export const EventCard = React.memo(({ event, isCreated, onDelete }: EventCardProps) => {
     const router = useRouter();
 
-    const handleDelete = async (e: React.MouseEvent) => {
+    const handleDelete = React.useCallback(async (e: React.MouseEvent) => {
         e.stopPropagation();
         if (window.confirm("Are you sure you want to delete this event?")) {
             onDelete?.(event.id);
         }
-    };
+    }, [event.id, onDelete]);
+
+    const handleCardClick = React.useCallback(() => {
+        router.push(
+            isCreated ? `/event/${event.id}/edit` : `/event/${event.id}`
+        );
+    }, [router, isCreated, event.id]);
 
     return (
         <div
             className="relative cursor-pointer group"
-            onClick={() =>
-                router.push(
-                    isCreated ? `/event/${event.id}/edit` : `/event/${event.id}`
-                )
-            }
+            onClick={handleCardClick}
         >
             <div className="overflow-hidden mb-3">
                 <div
@@ -60,4 +62,12 @@ export const EventCard = ({ event, isCreated, onDelete }: EventCardProps) => {
             <h3 className="text-base font-medium">{event.title}</h3>
         </div>
     );
-};
+}, (prevProps, nextProps) => {
+    return prevProps.event.id === nextProps.event.id &&
+        prevProps.event.title === nextProps.event.title &&
+        prevProps.event.date === nextProps.event.date &&
+        prevProps.event.time === nextProps.event.time &&
+        prevProps.event.background_image_url === nextProps.event.background_image_url &&
+        prevProps.isCreated === nextProps.isCreated &&
+        prevProps.onDelete === nextProps.onDelete; // Assuming onDelete is stable or we want to re-render if it changes
+});

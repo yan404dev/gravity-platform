@@ -16,7 +16,7 @@ interface MyEventsListProps {
 
 import { useTranslations } from 'next-intl';
 
-export function MyEventsList({
+export const MyEventsList = React.memo(function MyEventsList({
     user,
     initialCreatedEvents,
     initialRegisteredEvents,
@@ -95,4 +95,4 @@ export function MyEventsList({
             </div>
         </div>
     );
-}
+});

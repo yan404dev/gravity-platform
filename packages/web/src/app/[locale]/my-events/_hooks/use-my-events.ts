@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { User, MOCK_EVENTS } from "@/lib/mock-data";
 import { toast } from "sonner";
 import { Event } from "../../_types/event";
@@ -28,7 +28,7 @@ export function useMyEvents({
         loading: false,
     });
 
-    const refreshEvents = async () => {
+    const refreshEvents = useCallback(async () => {
         if (!user) return;
         setState((prev) => ({ ...prev, loading: true }));
         try {
@@ -44,9 +44,9 @@ export function useMyEvents({
             console.error("Error refreshing events:", error);
             setState((prev) => ({ ...prev, loading: false }));
         }
-    };
+    }, [user]);
 
-    const handleDeleteEvent = async (eventId: string) => {
+    const handleDeleteEvent = useCallback(async (eventId: string) => {
         try {
             // Mock delete
             console.log("Mock: Deleting", eventId);
@@ -64,7 +64,7 @@ export function useMyEvents({
             console.error("Error deleting event:", error);
             toast.error("Failed to delete event");
         }
-    };
+    }, []);
 
     return {
         ...state,

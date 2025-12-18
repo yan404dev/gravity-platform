@@ -3,8 +3,13 @@
 import React from "react";
 import { User } from "@/lib/mock-data";
 import { Navbar } from "@/components/navbar";
-import { EventCountdown } from "@/components/event-countdown";
 import { EventMeta } from "@/components/event-meta";
+import dynamic from 'next/dynamic';
+
+const EventCountdown = dynamic(() => import('@/components/event-countdown').then(mod => mod.EventCountdown), {
+    ssr: false,
+    loading: () => <div className="h-[49px] w-[409px] bg-gray-100 animate-pulse rounded" />
+});
 import { EventHeader } from "@/components/event-header";
 import { EventDescription } from "@/components/event-description";
 import { EventLocation } from "@/components/event-location";

@@ -7,6 +7,7 @@ import { Menu } from 'lucide-react';
 import { AuthSheet } from '../auth-sheet';
 import { useNavbar } from './use-navbar';
 import { LanguageSwitcher } from '../language-switcher';
+import { MobileMenu } from './mobile-menu';
 
 import { useTranslations } from 'next-intl';
 
@@ -100,63 +101,14 @@ export const Navbar: React.FC = () => {
                 {/* Right side - Language Switcher */}
                 <LanguageSwitcher />
 
-                {isMobileMenuOpen && (
-                    <div className="md:hidden fixed inset-0 z-[3000] flex flex-col animate-in slide-in-from-top duration-300">
-                        <div className="bg-[#1A1A1A] flex items-center justify-center py-16 animate-in fade-in duration-500">
-                            <button
-                                onClick={closeMobileMenu}
-                                className="text-white text-[11px] font-medium uppercase tracking-wider"
-                            >
-                                CLOSE
-                            </button>
-                        </div>
-
-                        <div className="flex-1 flex flex-col bg-white">
-                            <Link
-                                href="/"
-                                onClick={closeMobileMenu}
-                                className="flex-1 flex items-center justify-center text-[#1A1A1A] text-[17px] font-medium uppercase border-b border-black tracking-[-0.34px] animate-fade-in"
-                                style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
-                            >
-                                {tDiscover('discover')}
-                            </Link>
-                            <button
-                                onClick={handleCreateEventClick}
-                                className="flex-1 flex items-center justify-center text-[#1A1A1A] text-[17px] font-medium uppercase border-b border-black tracking-[-0.34px] animate-fade-in"
-                                style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
-                            >
-                                {t('createEvent')}
-                            </button>
-                            {user ? (
-                                <>
-                                    <Link
-                                        href="/my-events"
-                                        onClick={closeMobileMenu}
-                                        className="flex-1 flex items-center justify-center text-[#1A1A1A] text-[17px] font-medium uppercase border-b border-black tracking-[-0.34px] animate-fade-in"
-                                        style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
-                                    >
-                                        {t('myEvents')}
-                                    </Link>
-                                    <button
-                                        onClick={handleSignOut}
-                                        className="flex-1 flex items-center justify-center text-[#1A1A1A] text-[17px] font-medium uppercase tracking-[-0.34px] animate-fade-in"
-                                        style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
-                                    >
-                                        {t('signOut')}
-                                    </button>
-                                </>
-                            ) : (
-                                <button
-                                    onClick={openAuth}
-                                    className="flex-1 flex items-center justify-center text-[#1A1A1A] text-[17px] font-medium uppercase tracking-[-0.34px] animate-fade-in"
-                                    style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
-                                >
-                                    {t('signIn')}
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                )}
+                <MobileMenu
+                    isOpen={isMobileMenuOpen}
+                    user={user}
+                    onClose={closeMobileMenu}
+                    handleCreateEventClick={handleCreateEventClick}
+                    handleSignOut={handleSignOut}
+                    openAuth={openAuth}
+                />
             </nav>
 
             <AuthSheet isOpen={isAuthOpen} onClose={closeAuth} />
