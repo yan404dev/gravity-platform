@@ -54,11 +54,7 @@ model Profile {
 
   name     String
   document String?
-  email    String?
   phone    String?
-
-  category String?
-  privacy  ProfilePrivacy @default(PUBLIC)
 
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(6)
@@ -86,7 +82,6 @@ model Profile {
   eventReviews EventReview[]
 
   @@index([document], name: "profiles_document")
-  @@index([email], name: "profiles_email")
   @@map("profiles")
 }
 
@@ -97,6 +92,9 @@ model Event {
 
   startDate DateTime @map("start_date") @db.Timestamp(6)
   endDate   DateTime @map("end_date") @db.Timestamp(6)
+
+  category String?
+  privacy  EventPrivacy @default(PUBLIC)
 
   latitude  Float
   longitude Float
@@ -196,11 +194,11 @@ model EventReview {
   @@map("events_reviews")
 }
 
-enum ProfilePrivacy {
+enum EventPrivacy {
   PUBLIC  @map("public")
   PRIVATE @map("private")
 
-  @@map("profile_privacy")
+  @@map("event_privacy")
 }
 
 enum EventStatus {

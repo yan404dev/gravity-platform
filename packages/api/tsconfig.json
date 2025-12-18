@@ -28,11 +28,23 @@
       "@/als/*": [
         "libs/als/src/*"
       ],
+      "@/bcrypt": [
+        "libs/bcrypt/src"
+      ],
+      "@/bcrypt/*": [
+        "libs/bcrypt/src/*"
+      ],
       "@/prisma": [
         "libs/prisma/src"
       ],
       "@/prisma/*": [
         "libs/prisma/src/*"
+      ],
+      "@/query-builder": [
+        "libs/query-builder/src"
+      ],
+      "@/query-builder/*": [
+        "libs/query-builder/src/*"
       ]
     }
   }
