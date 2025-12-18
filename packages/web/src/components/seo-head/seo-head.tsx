@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 interface SEOHeadProps {
     title: string;
@@ -7,7 +7,12 @@ interface SEOHeadProps {
     image?: string;
 }
 
-export const SEOHead = ({ title, description, keywords, image }: SEOHeadProps) => {
+export const SEOHead = ({
+    title,
+    description,
+    keywords,
+    image,
+}: SEOHeadProps) => {
     if (typeof window !== 'undefined') {
         document.title = `${title} | Event Template`;
     }

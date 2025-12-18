@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
-import { User, MOCK_EVENTS } from "@/lib/mock-data";
-import { toast } from "sonner";
-import { Event } from "../../_types/event";
+import { useState, useCallback } from 'react';
+import { User, MOCK_EVENTS } from '@/lib/mock-data';
+import { toast } from 'sonner';
+import { Event } from '../../_types/event';
 
 interface MyEventsState {
     createdEvents: Event[];
@@ -33,15 +33,17 @@ export function useMyEvents({
         setState((prev) => ({ ...prev, loading: true }));
         try {
             // Mock refresh
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 500));
 
             setState({
                 createdEvents: MOCK_EVENTS as unknown as Event[],
-                registeredEvents: [...MOCK_EVENTS].reverse() as unknown as Event[],
+                registeredEvents: [
+                    ...MOCK_EVENTS,
+                ].reverse() as unknown as Event[],
                 loading: false,
             });
         } catch (error) {
-            console.error("Error refreshing events:", error);
+            console.error('Error refreshing events:', error);
             setState((prev) => ({ ...prev, loading: false }));
         }
     }, [user]);
@@ -49,20 +51,21 @@ export function useMyEvents({
     const handleDeleteEvent = useCallback(async (eventId: string) => {
         try {
             // Mock delete
-            console.log("Mock: Deleting", eventId);
-            await new Promise(resolve => setTimeout(resolve, 500));
+            console.log('Mock: Deleting', eventId);
+            await new Promise((resolve) => setTimeout(resolve, 500));
 
-            toast.success("Event deleted successfully");
+            toast.success('Event deleted successfully');
 
             // Optimistic update or refresh
-            setState(prev => ({
+            setState((prev) => ({
                 ...prev,
-                createdEvents: prev.createdEvents.filter(e => e.id !== eventId)
+                createdEvents: prev.createdEvents.filter(
+                    (e) => e.id !== eventId,
+                ),
             }));
-
         } catch (error) {
-            console.error("Error deleting event:", error);
-            toast.error("Failed to delete event");
+            console.error('Error deleting event:', error);
+            toast.error('Failed to delete event');
         }
     }, []);
 

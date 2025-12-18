@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 
-type TabType = "created" | "registered";
+type TabType = 'created' | 'registered';
 
 export function useSlidingTabs() {
-    const [activeTab, setActiveTab] = useState<TabType>("created");
+    const [activeTab, setActiveTab] = useState<TabType>('created');
     const [slideStyle, setSlideStyle] = useState({
         width: 0,
-        transform: "translateX(0)",
+        transform: 'translateX(0)',
     });
 
     const createdRef = useRef<HTMLButtonElement>(null);
@@ -16,13 +16,13 @@ export function useSlidingTabs() {
 
     useEffect(() => {
         const updateSlidePosition = () => {
-            if (activeTab === "created" && createdRef.current) {
+            if (activeTab === 'created' && createdRef.current) {
                 setSlideStyle({
                     width: createdRef.current.offsetWidth,
-                    transform: "translateX(0)",
+                    transform: 'translateX(0)',
                 });
             } else if (
-                activeTab === "registered" &&
+                activeTab === 'registered' &&
                 registeredRef.current &&
                 createdRef.current
             ) {
@@ -35,12 +35,12 @@ export function useSlidingTabs() {
 
         // Small timeout to ensure DOM is ready/layout is settled
         const timeoutId = setTimeout(updateSlidePosition, 0);
-        window.addEventListener("resize", updateSlidePosition);
+        window.addEventListener('resize', updateSlidePosition);
 
         return () => {
             clearTimeout(timeoutId);
-            window.removeEventListener("resize", updateSlidePosition);
-        }
+            window.removeEventListener('resize', updateSlidePosition);
+        };
     }, [activeTab]);
 
     return {

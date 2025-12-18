@@ -10,35 +10,35 @@ import { useTranslations } from 'next-intl';
 
 export const EventLocation: React.FC<EventLocationProps> = ({
     address,
-    onGetDirections
+    onGetDirections,
 }) => {
     const t = useTranslations('EventView');
     const encodedAddress = encodeURIComponent(address);
     return (
-        <section className="flex flex-col items-start gap-4 self-stretch relative">
-            <div className="flex flex-col items-start gap-5 self-stretch relative">
-                <hr className="h-px self-stretch relative bg-[#1A1A1A] border-0" />
-                <h2 className="self-stretch text-[#1A1A1A] text-[11px] font-normal uppercase relative">
+        <section className="relative flex flex-col items-start gap-4 self-stretch">
+            <div className="relative flex flex-col items-start gap-5 self-stretch">
+                <hr className="relative h-px self-stretch border-0 bg-[#1A1A1A]" />
+                <h2 className="relative self-stretch text-[11px] font-normal text-[#1A1A1A] uppercase">
                     {t('location')}
                 </h2>
             </div>
-            <div className="flex items-start gap-8 self-stretch relative max-sm:flex-col max-sm:gap-4">
-                <address className="flex-1 text-[#1A1A1A] text-[17px] font-normal leading-[20.74px] tracking-[-0.34px] relative not-italic">
+            <div className="relative flex items-start gap-8 self-stretch max-sm:flex-col max-sm:gap-4">
+                <address className="relative flex-1 text-[17px] leading-[20.74px] font-normal tracking-[-0.34px] text-[#1A1A1A] not-italic">
                     {address}
                 </address>
                 <a
                     href={`https://maps.google.com/?q=${encodedAddress}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#1A1A1A] text-[11px] font-normal uppercase relative bg-transparent cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-2 no-underline whitespace-nowrap"
+                    className="relative flex cursor-pointer items-center gap-2 bg-transparent text-[11px] font-normal whitespace-nowrap text-[#1A1A1A] uppercase no-underline transition-opacity hover:opacity-70"
                 >
-                    <img src={arrowRight.src} alt="" className="w-2 h-2.5" />
+                    <img src={arrowRight.src} alt="" className="h-2.5 w-2" />
                     {t('getDirections')}
                 </a>
             </div>
             <iframe
                 src={`https://www.google.com/maps?q=${encodedAddress}&output=embed`}
-                className="h-[214px] self-stretch relative w-full max-sm:h-[180px] border-0"
+                className="relative h-[214px] w-full self-stretch border-0 max-sm:h-[180px]"
                 loading="lazy"
                 title="Event location map"
             />

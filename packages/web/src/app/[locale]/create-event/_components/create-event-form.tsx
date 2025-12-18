@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Navbar } from "@/components/navbar";
-import { User } from "@/lib/mock-data";
-import { EventForm } from "@/components/event-form/event-form";
-import { useCreateEvent } from "../_hooks/use-create-event";
+import { Navbar } from '@/components/navbar';
+import { User } from '@/lib/mock-data';
+import { EventForm } from '@/components/event-form/event-form';
+import { useCreateEvent } from '../_hooks/use-create-event';
 
 interface CreateEventFormProps {
     user: User;
@@ -30,7 +30,7 @@ export function CreateEventForm({ user }: CreateEventFormProps) {
     return (
         <div className="min-h-screen bg-white">
             <Navbar />
-            <div className="max-w-7xl mx-auto pt-24 md:pt-32 pb-8 md:pb-16 px-4 md:px-8">
+            <div className="mx-auto max-w-7xl px-4 pt-24 pb-8 md:px-8 md:pt-32 md:pb-16">
                 <EventForm
                     form={form}
                     onSubmit={onSubmit}

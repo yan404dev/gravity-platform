@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { User } from "@/lib/mock-data";
-import { toast } from "sonner";
+import { useState } from 'react';
+import { User } from '@/lib/mock-data';
+import { toast } from 'sonner';
 
 interface UseEventViewProps {
     eventId: string;
@@ -25,8 +25,8 @@ export function useEventView({
 
     const handleRegister = async () => {
         if (isEventEnded) {
-            toast.error("Event has ended", {
-                description: "You cannot register for past events",
+            toast.error('Event has ended', {
+                description: 'You cannot register for past events',
             });
             return;
         }
@@ -38,24 +38,25 @@ export function useEventView({
 
         setLoading(true);
         try {
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 500));
 
             if (isRegistered) {
                 // Mock Unregister
                 setIsRegistered(false);
-                toast.success("Unregistered", {
-                    description: "You have been unregistered from this event",
+                toast.success('Unregistered', {
+                    description: 'You have been unregistered from this event',
                 });
             } else {
                 // Mock Register
                 setIsRegistered(true);
-                toast.success("Registered!", {
-                    description: "You have successfully registered for this event",
+                toast.success('Registered!', {
+                    description:
+                        'You have successfully registered for this event',
                 });
             }
         } catch (error: any) {
-            toast.error("Error", {
-                description: error.message || "Failed to update registration",
+            toast.error('Error', {
+                description: error.message || 'Failed to update registration',
             });
         } finally {
             setLoading(false);
@@ -63,7 +64,7 @@ export function useEventView({
     };
 
     const handleGetDirections = () => {
-        window.open("https://maps.google.com", "_blank");
+        window.open('https://maps.google.com', '_blank');
     };
 
     return {

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { MOCK_EVENTS } from '@/lib/mock-data';
@@ -11,14 +11,14 @@ export const useEventsCarousel = () => {
 
     useEffect(() => {
         // Use Mock Data
-        const mappedEvents = MOCK_EVENTS.map(e => ({
+        const mappedEvents = MOCK_EVENTS.map((e) => ({
             id: e.id,
             title: e.title,
             background_image_url: e.background_image_url,
             address: e.address,
             date: e.date,
             time: e.time,
-            target_date: e.target_date
+            target_date: e.target_date,
         }));
 
         setEvents(mappedEvents);
@@ -30,6 +30,6 @@ export const useEventsCarousel = () => {
 
     return {
         events,
-        handleEventClick
+        handleEventClick,
     };
 };

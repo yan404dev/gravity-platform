@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,13 +15,13 @@ export const useAuthSheet = (onClose: () => void) => {
         register,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
     } = useForm<AuthFormData>({
         resolver: zodResolver(authSchema),
         defaultValues: {
             email: '',
-            password: ''
-        }
+            password: '',
+        },
     });
 
     const onSubmit = async (data: AuthFormData) => {
@@ -29,24 +29,30 @@ export const useAuthSheet = (onClose: () => void) => {
 
         try {
             if (isSignUp) {
-                const { error } = await authService.signUp(data.email, data.password);
+                const { error } = await authService.signUp(
+                    data.email,
+                    data.password,
+                );
 
                 if (error) throw error;
 
                 toast({
                     title: 'Account created!',
-                    description: 'You can now sign in with your credentials.'
+                    description: 'You can now sign in with your credentials.',
                 });
                 setIsSignUp(false);
                 reset({ ...data, password: '' });
             } else {
-                const { error } = await authService.signIn(data.email, data.password);
+                const { error } = await authService.signIn(
+                    data.email,
+                    data.password,
+                );
 
                 if (error) throw error;
 
                 toast({
                     title: 'Welcome back!',
-                    description: 'You have successfully signed in.'
+                    description: 'You have successfully signed in.',
                 });
                 reset();
                 onClose();
@@ -55,7 +61,7 @@ export const useAuthSheet = (onClose: () => void) => {
             toast({
                 title: 'Error',
                 description: error.message,
-                variant: 'destructive'
+                variant: 'destructive',
             });
         } finally {
             setLoading(false);
@@ -70,6 +76,6 @@ export const useAuthSheet = (onClose: () => void) => {
         register,
         errors,
         handleSubmit: handleSubmit(onSubmit),
-        toggleMode
+        toggleMode,
     };
 };

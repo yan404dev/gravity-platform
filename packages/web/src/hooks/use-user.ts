@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { User } from "@/lib/mock-data";
-import { authService } from "@/lib/auth-store";
+import { useEffect, useState } from 'react';
+import { User } from '@/lib/mock-data';
+import { authService } from '@/lib/auth-store';
 
 export function useUser() {
     const [user, setUser] = useState<User | null>(null);

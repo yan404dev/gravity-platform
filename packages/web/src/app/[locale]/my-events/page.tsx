@@ -7,27 +7,29 @@ import { Event } from '../_types/event';
 export const revalidate = 0;
 
 export default async function MyEventsPage() {
-  const user = MOCK_USER;
+    const user = MOCK_USER;
 
-  if (!user) {
-    redirect('/');
-  }
+    if (!user) {
+        redirect('/');
+    }
 
-  // Mock filtering
-  const createdEvents = MOCK_EVENTS.filter(e => e.creator === user.id) as unknown as Event[];
-  const registeredEvents = [] as Event[];
+    // Mock filtering
+    const createdEvents = MOCK_EVENTS.filter(
+        (e) => e.creator === user.id,
+    ) as unknown as Event[];
+    const registeredEvents = [] as Event[];
 
-  return (
-    <>
-      <SEOHead
-        title="My Events"
-        description="Manage your created events and view events you've registered for"
-      />
-      <MyEventsList
-        user={user}
-        initialCreatedEvents={createdEvents}
-        initialRegisteredEvents={registeredEvents}
-      />
-    </>
-  );
+    return (
+        <>
+            <SEOHead
+                title="My Events"
+                description="Manage your created events and view events you've registered for"
+            />
+            <MyEventsList
+                user={user}
+                initialCreatedEvents={createdEvents}
+                initialRegisteredEvents={registeredEvents}
+            />
+        </>
+    );
 }

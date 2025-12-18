@@ -5,18 +5,20 @@ interface EventDescriptionProps {
 import { useTranslations } from 'next-intl';
 
 export const EventDescription: React.FC<EventDescriptionProps> = ({
-    description
+    description,
 }) => {
     const t = useTranslations('EventView');
-    return <section className="flex flex-col items-start gap-4 self-stretch relative">
-        <div className="flex flex-col items-start gap-5 self-stretch relative my-0">
-            <hr className="h-px self-stretch relative bg-[#1A1A1A] border-0" />
-            <h2 className="self-stretch text-[#1A1A1A] text-[11px] font-normal uppercase relative">
-                {t('about')}
-            </h2>
-        </div>
-        <p className="self-stretch text-[#1A1A1A] text-[17px] font-normal leading-[20.74px] tracking-[-0.34px] relative">
-            {description}
-        </p>
-    </section>;
+    return (
+        <section className="relative flex flex-col items-start gap-4 self-stretch">
+            <div className="relative my-0 flex flex-col items-start gap-5 self-stretch">
+                <hr className="relative h-px self-stretch border-0 bg-[#1A1A1A]" />
+                <h2 className="relative self-stretch text-[11px] font-normal text-[#1A1A1A] uppercase">
+                    {t('about')}
+                </h2>
+            </div>
+            <p className="relative self-stretch text-[17px] leading-[20.74px] font-normal tracking-[-0.34px] text-[#1A1A1A]">
+                {description}
+            </p>
+        </section>
+    );
 };

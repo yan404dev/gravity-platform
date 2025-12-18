@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Navbar } from "@/components/navbar";
-import { Event } from "../../_types/event";
-import { EventEditForm } from "./event-edit-form";
-import { User } from "@/lib/mock-data";
-import { useAdminDashboard } from "../_hooks/use-admin-dashboard";
+import { Navbar } from '@/components/navbar';
+import { Event } from '../../_types/event';
+import { EventEditForm } from './event-edit-form';
+import { User } from '@/lib/mock-data';
+import { useAdminDashboard } from '../_hooks/use-admin-dashboard';
 
 interface AdminDashboardProps {
     initialEvents: Event[];
@@ -12,35 +12,32 @@ interface AdminDashboardProps {
 }
 
 export function AdminDashboard({ initialEvents, user }: AdminDashboardProps) {
-    const {
-        events,
-        selectedEvent,
-        setSelectedEvent,
-        refreshEvents,
-    } = useAdminDashboard({ initialEvents, user });
+    const { events, selectedEvent, setSelectedEvent, refreshEvents } =
+        useAdminDashboard({ initialEvents, user });
 
     return (
-        <div className="max-w-4xl mx-auto pt-32">
+        <div className="mx-auto max-w-4xl pt-32">
             <Navbar />
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-4xl font-normal text-[#1A1A1A] tracking-[-0.02em]">
+            <div className="mb-8 flex items-center justify-between">
+                <h1 className="text-4xl font-normal tracking-[-0.02em] text-[#1A1A1A]">
                     Event CMS
                 </h1>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                 {/* Sidebar List */}
-                <div className="md:col-span-1 border-r border-gray-200 pr-4">
-                    <h3 className="font-bold mb-4">Events</h3>
+                <div className="border-r border-gray-200 pr-4 md:col-span-1">
+                    <h3 className="mb-4 font-bold">Events</h3>
                     <ul className="space-y-2">
                         {events.map((evt) => (
                             <li key={evt.id}>
                                 <button
                                     onClick={() => setSelectedEvent(evt)}
-                                    className={`w-full text-left p-2 hover:bg-gray-100 rounded ${selectedEvent?.id === evt.id
-                                        ? "bg-gray-100 font-medium"
-                                        : ""
-                                        }`}
+                                    className={`w-full rounded p-2 text-left hover:bg-gray-100 ${
+                                        selectedEvent?.id === evt.id
+                                            ? 'bg-gray-100 font-medium'
+                                            : ''
+                                    }`}
                                 >
                                     {evt.title}
                                 </button>
@@ -58,7 +55,9 @@ export function AdminDashboard({ initialEvents, user }: AdminDashboardProps) {
                             onSuccess={refreshEvents}
                         />
                     ) : (
-                        <div className="text-gray-500">Select an event to edit</div>
+                        <div className="text-gray-500">
+                            Select an event to edit
+                        </div>
                     )}
                 </div>
             </div>

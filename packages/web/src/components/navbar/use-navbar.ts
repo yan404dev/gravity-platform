@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { User } from '@/lib/mock-data';
@@ -17,7 +17,9 @@ export const useNavbar = () => {
             setUser(session?.user ?? null);
         });
 
-        const { data: { subscription } } = authService.onAuthStateChange((event, session) => {
+        const {
+            data: { subscription },
+        } = authService.onAuthStateChange((event, session) => {
             setUser(session?.user ?? null);
         });
 
@@ -73,7 +75,7 @@ export const useNavbar = () => {
             toggleMobileMenu,
             closeMobileMenu,
             closeAuth,
-            setIsAuthOpen
-        }
+            setIsAuthOpen,
+        },
     };
 };

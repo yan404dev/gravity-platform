@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useMemo } from "react";
-import { Event } from "../_types/event";
+import { useState, useEffect, useMemo } from 'react';
+import { Event } from '../_types/event';
 
 interface UseDiscoverProps {
     initialEvents: Event[];
@@ -9,8 +9,8 @@ interface UseDiscoverProps {
 
 export function useDiscover({ initialEvents }: UseDiscoverProps) {
     const [date, setDate] = useState<Date | undefined>(undefined);
-    // We can treat passed events as the source of truth. 
-    // If we needed to re-fetch, we'd use SWR or another state. 
+    // We can treat passed events as the source of truth.
+    // If we needed to re-fetch, we'd use SWR or another state.
     // For now, we use the initialEvents passed from server.
 
     const [userCountry, setUserCountry] = useState<string>('the world');

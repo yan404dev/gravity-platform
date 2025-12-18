@@ -15,9 +15,9 @@ export const EventsCarousel = React.memo(() => {
     if (events.length === 0) return null;
 
     return (
-        <div className="w-full overflow-hidden py-12 pb-20 md:pb-24 bg-background">
+        <div className="bg-background w-full overflow-hidden py-12 pb-20 md:pb-24">
             <div className="relative overflow-hidden">
-                <div className="flex gap-px w-max animate-scroll-left-fast will-change-[transform]">
+                <div className="animate-scroll-left-fast flex w-max gap-px will-change-[transform]">
                     {multipliedEvents.map((event, index) => (
                         <CarouselItem
                             key={`${event.id}-${index}`}

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useEffect } from 'react';
 
 interface TimeLeft {
@@ -18,9 +18,13 @@ export const useEventCountdown = (targetDate: Date) => {
         if (distance > 0) {
             return {
                 days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-                hours: Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)),
-                minutes: Math.floor(distance % (1000 * 60 * 60) / (1000 * 60)),
-                seconds: Math.floor(distance % (1000 * 60) / 1000)
+                hours: Math.floor(
+                    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+                ),
+                minutes: Math.floor(
+                    (distance % (1000 * 60 * 60)) / (1000 * 60),
+                ),
+                seconds: Math.floor((distance % (1000 * 60)) / 1000),
             };
         }
 
@@ -38,7 +42,9 @@ export const useEventCountdown = (targetDate: Date) => {
         return 'upcoming';
     };
 
-    const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft(targetDate));
+    const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
+        calculateTimeLeft(targetDate),
+    );
     const [status, setStatus] = useState<EventStatus>(getEventStatus());
 
     useEffect(() => {
@@ -57,6 +63,6 @@ export const useEventCountdown = (targetDate: Date) => {
     return {
         timeLeft,
         status,
-        formatTime
+        formatTime,
     };
 };
