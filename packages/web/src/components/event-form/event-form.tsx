@@ -25,6 +25,8 @@ interface EventFormProps {
     extraContent?: React.ReactNode;
 }
 
+import { useTranslations } from 'next-intl';
+
 export function EventForm({
     form,
     onSubmit,
@@ -44,6 +46,7 @@ export function EventForm({
 }: EventFormProps) {
     const { register, formState: { errors } } = form;
     const [isDragging, setIsDragging] = useState(false);
+    const t = useTranslations('CreateEvent');
 
     return (
         <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
@@ -81,7 +84,7 @@ export function EventForm({
                             />
                             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <span className="bg-white px-3 py-1 text-[11px] font-medium uppercase tracking-wider border border-black">
-                                    Change Image
+                                    {t('changeImage')}
                                 </span>
                             </div>
                         </>
@@ -93,7 +96,7 @@ export function EventForm({
                                 <line x1="12" y1="3" x2="12" y2="15" />
                             </svg>
                             <span className="text-black text-[11px] font-medium uppercase tracking-wider">
-                                {isDragging ? "DROP IMAGE HERE" : "ADD IMAGE"}
+                                {isDragging ? t('dropImage') : t('addImage')}
                             </span>
                         </div>
                     )}
@@ -113,7 +116,7 @@ export function EventForm({
                             className="px-4 py-3 text-[13px] font-medium uppercase tracking-wider border border-black bg-white hover:bg-black hover:text-white transition-colors"
                             type="button"
                         >
-                            Change image
+                            {t('changeImage')}
                         </button>
                     )
                 }
@@ -123,7 +126,7 @@ export function EventForm({
                 <div>
                     <input
                         type="text"
-                        placeholder="Event name"
+                        placeholder={t('eventName')}
                         className={cn(
                             "w-full text-black font-medium leading-[1.2] mb-4 md:mb-8 focus:outline-none bg-transparent border-none p-0 placeholder:text-[#C4C4C4]",
                             "text-[32px] md:text-[48px] lg:text-[56px]"
@@ -139,7 +142,7 @@ export function EventForm({
                     <div className="grid grid-cols-[80px_1fr_80px] md:grid-cols-[100px_1fr_100px] gap-0 border border-black mb-4 md:mb-6">
                         <div className="flex items-center justify-start gap-1.5 md:gap-2 border-r border-black px-2 md:px-3 py-2 md:py-3">
                             <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-black rounded-full"></div>
-                            <span className="text-[14px] md:text-[17px] font-medium">Start</span>
+                            <span className="text-[14px] md:text-[17px] font-medium">{t('start')}</span>
                         </div>
                         <Popover>
                             <PopoverTrigger asChild>
@@ -176,7 +179,7 @@ export function EventForm({
                     <div className="grid grid-cols-[80px_1fr_80px] md:grid-cols-[100px_1fr_100px] gap-0 border border-black">
                         <div className="flex items-center justify-start gap-1.5 md:gap-2 border-r border-black px-2 md:px-3 py-2 md:py-3">
                             <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-black rounded-full"></div>
-                            <span className="text-[14px] md:text-[17px] font-medium">End</span>
+                            <span className="text-[14px] md:text-[17px] font-medium">{t('end')}</span>
                         </div>
                         <Popover>
                             <PopoverTrigger asChild>
@@ -214,7 +217,7 @@ export function EventForm({
                 <div>
                     <input
                         type="text"
-                        placeholder="Add event location"
+                        placeholder={t('location')}
                         className="w-full px-3 md:px-4 py-2 md:py-3 text-[14px] md:text-[17px] text-black border border-black focus:outline-none placeholder:text-[#C4C4C4]"
                         {...(() => {
                             const { ref, ...rest } = register("location");
@@ -237,7 +240,7 @@ export function EventForm({
 
                 <div>
                     <textarea
-                        placeholder="Add description"
+                        placeholder={t('description')}
                         rows={6}
                         className="w-full px-3 md:px-4 py-2 md:py-3 text-[14px] md:text-[17px] text-black border border-black focus:outline-none resize-none placeholder:text-[#C4C4C4]"
                         {...register("description")}

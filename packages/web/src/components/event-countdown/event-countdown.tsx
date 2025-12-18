@@ -1,12 +1,14 @@
 import React from 'react';
-import { RotatingBadge } from '../rotating-badge';
 import { useEventCountdown } from './use-event-countdown';
+import { useTranslations } from 'next-intl';
+
 interface EventCountdownProps {
     targetDate?: Date;
 }
 export const EventCountdown: React.FC<EventCountdownProps> = ({
     targetDate = new Date(Date.now() + 132 * 24 * 60 * 60 * 1000 + 12 * 60 * 60 * 1000 + 51 * 60 * 1000 + 2 * 1000)
 }) => {
+    const t = useTranslations('EventView');
     const { timeLeft, status, formatTime } = useEventCountdown(targetDate);
     if (status === 'ended') {
         return null;
@@ -14,11 +16,9 @@ export const EventCountdown: React.FC<EventCountdownProps> = ({
 
     if (status === 'happening') {
         return (
-            <RotatingBadge
-                text="LIVE"
-                showIcon={false}
-                className="relative w-[80px] h-[80px] md:w-[100px] md:h-[100px] lg:w-[120px] lg:h-[120px]"
-            />
+            <div className="relative w-[80px] h-[80px] md:w-[100px] md:h-[100px] lg:w-[120px] lg:h-[120px] flex items-center justify-center bg-white border border-black rounded-full">
+                <span className="text-black font-medium">{t('live')}</span>
+            </div>
         );
     }
 

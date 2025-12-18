@@ -1,0 +1,60 @@
+{
+  "Common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito"
+  },
+  "Navbar": {
+    "createEvent": "Crear Evento",
+    "myEvents": "Mis Eventos",
+    "admin": "Admin",
+    "signIn": "Iniciar Sesión",
+    "signOut": "Cerrar Sesión"
+  },
+  "Discover": {
+    "browse": "EXPLORAR",
+    "discover": "Descubre",
+    "events": "eventos",
+    "near": "cerca",
+    "you": "de ti",
+    "subheading": "Explora eventos populares cerca de ti, navega por categoría o consulta algunos de los excelentes calendarios de la comunidad.",
+    "browsingIn": "Explorando eventos en",
+    "pickDate": "Elige una fecha",
+    "noEvents": "No se encontraron eventos"
+  },
+  "CreateEvent": {
+    "title": "Crear Evento",
+    "submit": "CREAR EVENTO",
+    "submitting": "CREANDO...",
+    "eventName": "Nombre del evento",
+    "start": "Inicio",
+    "end": "Fin",
+    "location": "Añadir ubicación del evento",
+    "description": "Añadir descripción",
+    "addImage": "AÑADIR IMAGEN",
+    "dropImage": "SUELTA LA IMAGEN AQUÍ",
+    "changeImage": "Cambiar Imagen"
+  },
+  "MyEvents": {
+    "title": "Mis Eventos",
+    "created": "Creado por mí",
+    "registered": "Registrado",
+    "noCreated": "Aún no has creado ningún evento",
+    "noRegistered": "Aún no te has registrado en ningún evento",
+    "updating": "Actualizando..."
+  },
+  "EventCard": {
+    "liveNow": "EN VIVO AHORA"
+  },
+  "EventView": {
+    "loading": "CARGANDO...",
+    "eventEnded": "EVENTO FINALIZADO",
+    "unregister": "CANCELAR REGISTRO",
+    "register": "REGISTRARSE",
+    "about": "ACERCA DE ESTE EVENTO",
+    "by": "POR",
+    "location": "UBICACIÓN",
+    "getDirections": "CÓMO LLEGAR",
+    "live": "EN VIVO"
+  }
+}

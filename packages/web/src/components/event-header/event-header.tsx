@@ -5,7 +5,10 @@ interface EventHeaderProps {
     creator: string;
 }
 
+import { useTranslations } from 'next-intl';
+
 export const EventHeader: React.FC<EventHeaderProps> = ({ title, creator }) => {
+    const t = useTranslations('EventView');
     return (
         <div className="flex flex-col items-start gap-4 self-stretch relative">
             <header>
@@ -14,7 +17,7 @@ export const EventHeader: React.FC<EventHeaderProps> = ({ title, creator }) => {
                 </h1>
             </header>
             <div className="self-stretch text-[#1A1A1A] text-[11px] font-normal uppercase relative">
-                BY {creator}
+                {t('by')} {creator}
             </div>
         </div>
     );

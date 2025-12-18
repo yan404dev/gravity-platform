@@ -10,6 +10,8 @@ interface EventRegistrationProps {
     className?: string;
 }
 
+import { useTranslations } from 'next-intl';
+
 export const EventRegistration: React.FC<EventRegistrationProps> = ({
     onRegister,
     isRegistered,
@@ -17,6 +19,7 @@ export const EventRegistration: React.FC<EventRegistrationProps> = ({
     isEnded = false,
     className = "",
 }) => {
+    const t = useTranslations('EventView');
     return (
         <div className={`group flex items-center self-stretch relative overflow-hidden ${className}`}>
             <button
@@ -29,7 +32,7 @@ export const EventRegistration: React.FC<EventRegistrationProps> = ({
                 aria-label={isEnded ? "Event has ended" : isRegistered ? "Unregister from event" : "Register for event"}
             >
                 <span className={`text-white text-[13px] font-normal uppercase relative transition-colors duration-300 ${!isEnded && 'group-hover:text-black'}`}>
-                    {isLoading ? "LOADING..." : isEnded ? "EVENT ENDED" : isRegistered ? "UNREGISTER" : "REGISTER"}
+                    {isLoading ? t('loading') : isEnded ? t('eventEnded') : isRegistered ? t('unregister') : t('register')}
                 </span>
                 <svg
                     width="12"
