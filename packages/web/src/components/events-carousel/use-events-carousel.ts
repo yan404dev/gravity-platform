@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { MOCK_EVENTS } from '@/lib/mock-data';
 
-import { Event } from '../../app/[locale]/_types/event';
+import { Event } from '../../app/[locale]/(home)/_types/event';
 
 export const useEventsCarousel = () => {
     const [events, setEvents] = useState<Event[]>([]);

@@ -12,7 +12,7 @@ import {
     EditEventFormData,
     editEventSchema,
 } from '../_schemas/edit-event.schema';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface UseEditEventProps {
     event: Event;

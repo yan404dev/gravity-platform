@@ -1,29 +1,23 @@
 export type User = {
     id: string;
     email: string;
-    user_metadata: {
-        display_name?: string;
-        avatar_url?: string;
-        role?: 'admin' | 'user';
-    };
+    displayName: string;
+    avatarUrl?: string;
+    role: 'admin' | 'user';
 };
 
 export const MOCK_USER: User = {
     id: 'mock-user-id',
     email: 'user@example.com',
-    user_metadata: {
-        display_name: 'John Doe',
-        role: 'user',
-    },
+    displayName: 'John Doe',
+    role: 'user',
 };
 
 export const MOCK_ADMIN: User = {
     id: 'mock-admin-id',
     email: 'admin@example.com',
-    user_metadata: {
-        display_name: 'Alice Admin',
-        role: 'admin',
-    },
+    displayName: 'Alice Admin',
+    role: 'admin',
 };
 
 export const MOCK_EVENTS = [

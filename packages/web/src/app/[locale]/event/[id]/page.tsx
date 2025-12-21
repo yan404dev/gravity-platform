@@ -3,7 +3,7 @@ import { SEOHead } from '@/components/seo-head';
 import { Navbar } from '@/components/navbar';
 import { Link } from '@/i18n/routing';
 import { MOCK_EVENTS, MOCK_USER } from '@/lib/mock-data';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface PageProps {
     params: Promise<{ id: string }>;

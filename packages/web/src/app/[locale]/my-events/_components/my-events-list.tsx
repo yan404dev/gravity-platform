@@ -4,7 +4,7 @@ import React from 'react';
 import { Navbar } from '@/components/navbar';
 import { useMyEvents } from '../_hooks/use-my-events';
 import { useSlidingTabs } from '../_hooks/use-sliding-tabs';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 import { User } from '@/lib/mock-data';
 import { EventCard } from './event-card';
 

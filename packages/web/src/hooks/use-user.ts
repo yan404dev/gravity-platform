@@ -1,30 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { User } from '@/lib/mock-data';
-import { authService } from '@/lib/auth-store';
+import { MOCK_USER, User } from '@/lib/mock-data';
 
+/**
+ * Hook simplificado para obter o usuário atual.
+ * TODO: Substituir por chamada real à API quando implementada.
+ */
 export function useUser() {
-    const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        // Check active session
-        authService.getSession().then(({ data: { session } }) => {
-            setUser(session?.user || null);
-            setLoading(false);
-        });
-
-        // Listen for changes
-        const {
-            data: { subscription },
-        } = authService.onAuthStateChange((_event, session) => {
-            setUser(session?.user || null);
-            setLoading(false);
-        });
-
-        return () => subscription.unsubscribe();
-    }, []);
+    // Mock: sempre retorna usuário logado
+    const user: User | null = MOCK_USER;
+    const loading = false;
 
     return { user, loading };
 }

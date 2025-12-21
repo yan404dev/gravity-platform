@@ -1,17 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, MOCK_EVENTS } from '@/lib/mock-data';
 import { useToast } from '@/hooks/use-toast';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 import {
     EventEditFormData,
     eventEditSchema,
 } from '../_schemas/event-edit.schema';
-import { authService } from '@/lib/auth-store';
 
 interface UseAdminDashboardProps {
     initialEvents: Event[];
@@ -26,11 +24,11 @@ export function useAdminDashboard({
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(
         initialEvents.length > 0 ? initialEvents[0] : null,
     );
-    const router = useRouter();
     const { toast } = useToast();
 
     const handleSignOut = async () => {
-        await authService.signOut();
+        // TODO: Implementar logout real
+        console.log('Sign out clicked');
         window.location.href = '/';
     };
 
@@ -97,9 +95,9 @@ export function useEventEditForm({
 
         setUploading(true);
         try {
+            // TODO: Implementar upload real
             console.log('Mock: Uploading admin image', file.name);
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            // Return dummy URL
             const publicUrl =
                 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=1000';
 
@@ -118,6 +116,7 @@ export function useEventEditForm({
 
     const onSubmit = async (data: EventEditFormData) => {
         try {
+            // TODO: Implementar save real
             console.log('Mock: Updating event', event.id, data);
             await new Promise((resolve) => setTimeout(resolve, 500));
 

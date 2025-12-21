@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
-import { authService } from '@/lib/auth-store';
 import { authSchema, AuthFormData } from './auth.schema';
 
 export const useAuthSheet = (onClose: () => void) => {
@@ -28,14 +27,10 @@ export const useAuthSheet = (onClose: () => void) => {
         setLoading(true);
 
         try {
+            // TODO: Implementar chamada real à API
+            console.log('Auth submit:', { isSignUp, ...data });
+
             if (isSignUp) {
-                const { error } = await authService.signUp(
-                    data.email,
-                    data.password,
-                );
-
-                if (error) throw error;
-
                 toast({
                     title: 'Account created!',
                     description: 'You can now sign in with your credentials.',
@@ -43,13 +38,6 @@ export const useAuthSheet = (onClose: () => void) => {
                 setIsSignUp(false);
                 reset({ ...data, password: '' });
             } else {
-                const { error } = await authService.signIn(
-                    data.email,
-                    data.password,
-                );
-
-                if (error) throw error;
-
                 toast({
                     title: 'Welcome back!',
                     description: 'You have successfully signed in.',

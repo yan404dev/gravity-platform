@@ -25,7 +25,7 @@ import { EventRegistration } from '@/components/event-registration';
 import { AuthSheet } from '@/components/auth-sheet';
 import { SEOHead } from '@/components/seo-head';
 import { useEventView } from '../_hooks/use-event-view';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface EventViewProps {
     event: Event;

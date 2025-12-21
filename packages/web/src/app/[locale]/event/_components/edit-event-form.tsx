@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Trash2 } from 'lucide-react';
 import { EventForm } from '@/components/event-form/event-form';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface EditEventFormProps {
     event: Event;
@@ -69,8 +69,8 @@ export function EditEventForm({
                                             className={cn(
                                                 'flex items-center justify-between px-3 py-2 md:px-4 md:py-3',
                                                 index !==
-                                                    registrants.length - 1 &&
-                                                    'border-b border-black',
+                                                registrants.length - 1 &&
+                                                'border-b border-black',
                                             )}
                                         >
                                             <span className="text-[14px] font-medium md:text-[17px]">

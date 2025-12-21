@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useEventsCarousel } from './use-events-carousel';
-import { Event } from '../../app/[locale]/_types/event';
+import { Event } from '../../app/[locale]/(home)/_types/event';
 
 import { CarouselItem } from './carousel-item';
 

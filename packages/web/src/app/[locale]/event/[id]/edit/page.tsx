@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { EditEventForm } from '../../_components/edit-event-form';
 import { SEOHead } from '@/components/seo-head';
 import { MOCK_EVENTS, MOCK_USER } from '@/lib/mock-data';
-import { Event } from '../../../_types/event';
+import { Event } from '../../../(home)/_types/event';
 
 interface PageProps {
     params: Promise<{ id: string }>;

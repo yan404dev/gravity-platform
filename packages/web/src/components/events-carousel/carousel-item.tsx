@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Event } from '../../app/[locale]/_types/event';
+import { Event } from '../../app/[locale]/(home)/_types/event';
 
 interface CarouselItemProps {
     event: Event;

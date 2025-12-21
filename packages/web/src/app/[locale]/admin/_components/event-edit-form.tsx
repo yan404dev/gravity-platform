@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 import { User } from '@/lib/mock-data';
 import { useEventEditForm } from '../_hooks/use-admin-dashboard';
 
