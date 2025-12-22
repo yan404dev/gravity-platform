@@ -20,15 +20,13 @@ export const Navbar: React.FC = () => {
         isAuthOpen,
         isMobileMenuOpen,
         mounted,
-        actions: {
-            handleSignOut,
-            handleCreateEventClick,
-            openAuth,
-            toggleMobileMenu,
-            closeMobileMenu,
-            closeAuth,
-            setIsAuthOpen,
-        },
+        handleSignOut,
+        handleCreateEventClick,
+        openAuth,
+        toggleMobileMenu,
+        closeMobileMenu,
+        closeAuth,
+        setIsAuthOpen,
     } = useNavbar();
 
     if (!mounted) return null;
