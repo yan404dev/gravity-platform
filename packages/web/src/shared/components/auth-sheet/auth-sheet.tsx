@@ -1,5 +1,4 @@
-'use client';
-
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAuthSheet } from './use-auth-sheet';
 import {
@@ -8,20 +7,22 @@ import {
     SheetHeader,
     SheetTitle,
     SheetDescription,
+    SheetTrigger
 } from '@/shared/components/ui/sheet';
 
 interface AuthSheetProps {
-    isOpen: boolean;
-    onClose: () => void;
+    children?: React.ReactNode;
 }
 
-export const AuthSheet = ({ isOpen, onClose }: AuthSheetProps) => {
+export const AuthSheet = ({ children }: AuthSheetProps) => {
     const t = useTranslations('AuthSheet');
+    const [isOpen, setIsOpen] = useState(false);
     const { isSignUp, loading, register, errors, handleSubmit, toggleMode } =
-        useAuthSheet(onClose);
+        useAuthSheet(() => setIsOpen(false));
 
     return (
-        <Sheet open={isOpen} onOpenChange={onClose}>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            {children && <SheetTrigger asChild>{children}</SheetTrigger>}
             <SheetContent className="w-full max-w-md bg-[#1A1A1A] p-0 border-l border-white/10 sm:max-w-md">
                 <div className="flex h-full flex-col px-10 pt-24 pb-10">
                     <SheetHeader className="mb-8 text-left">
