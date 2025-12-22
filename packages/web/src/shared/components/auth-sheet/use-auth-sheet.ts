@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useToast } from '@/shared/hooks/use-toast';
 import { createAuthSchema, AuthFormData } from './auth.schema';
@@ -13,6 +13,8 @@ export const useAuthSheet = (onClose: () => void) => {
     const t = useTranslations('AuthSheet');
     const [isSignUp, setIsSignUp] = useState(false);
     const { toast } = useToast();
+
+    const queryClient = useQueryClient();
 
     const authSchema = createAuthSchema(t);
 
@@ -37,11 +39,13 @@ export const useAuthSheet = (onClose: () => void) => {
 
     const { mutate: login, isPending: isLoginPending } = useMutation({
         mutationFn: (data: AuthFormData) => authService.login(data),
-        onSuccess: () =>
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['me'] });
             handleSuccess(
                 t('success.signIn.title'),
                 t('success.signIn.description'),
-            ),
+            );
+        },
     });
 
     const { mutate: registerUser, isPending: isRegisterPending } = useMutation({

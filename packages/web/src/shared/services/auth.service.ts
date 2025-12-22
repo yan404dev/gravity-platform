@@ -11,5 +11,14 @@ export const authService = {
   async register(payload: AuthFormData): Promise<User> {
     const { data } = await api.post<User>('/users/onboarding', payload);
     return data;
+  },
+
+  async me(): Promise<User> {
+    const { data } = await api.get<User>('/auth/me');
+    return data;
+  },
+
+  async logout(): Promise<void> {
+    await api.post('/auth/logout');
   }
 }

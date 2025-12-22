@@ -126,13 +126,13 @@ export const Navbar: React.FC = () => {
                     {user && (
                         <Avatar className="h-9 w-9 border border-white/20 transition-opacity hover:opacity-80">
                             <AvatarImage
-                                src={user.avatarUrl}
-                                alt={user.displayName || user.email}
+                                src={undefined}
+                                alt={user.name || user.email}
                                 className="object-cover"
                             />
                             <AvatarFallback className="bg-[#1A1A1A] text-xs font-medium text-white uppercase">
-                                {user.displayName
-                                    ? user.displayName.substring(0, 2)
+                                {user.name
+                                    ? user.name.substring(0, 2)
                                     : user.email.substring(0, 2)}
                             </AvatarFallback>
                         </Avatar>

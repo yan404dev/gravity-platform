@@ -9,7 +9,8 @@
         "myEvents": "Meus Eventos",
         "admin": "Admin",
         "signIn": "Entrar",
-        "signOut": "Sair"
+        "signOut": "Sair",
+        "signOutSuccess": "Desconectado com sucesso"
     },
     "Discover": {
         "browse": "NAVEGAR",

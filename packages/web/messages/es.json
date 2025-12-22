@@ -9,7 +9,8 @@
         "myEvents": "Mis Eventos",
         "admin": "Admin",
         "signIn": "Iniciar Sesión",
-        "signOut": "Cerrar Sesión"
+        "signOut": "Cerrar Sesión",
+        "signOutSuccess": "Sesión cerrada exitosamente"
     },
     "Discover": {
         "browse": "EXPLORAR",
