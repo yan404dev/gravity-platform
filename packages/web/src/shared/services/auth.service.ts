@@ -24,10 +24,5 @@ export const authService = {
 
   async logout(): Promise<void> {
     storageService.removeToken();
-    try {
-      await api.post('/auth/logout');
-    } catch (error) {
-      // Ignore errors during backend logout, ensuring client cleanup
-    }
   }
 }
