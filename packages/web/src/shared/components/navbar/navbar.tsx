@@ -116,7 +116,7 @@ export const Navbar: React.FC = () => {
                 <MobileMenu
                     user={user}
                     handleSignOut={handleSignOut}
-                    handleCreateEventClick={() => { }} // No longer used directly, handled internally or via link
+                    handleCreateEventClick={() => { }}
                 >
                     <button
                         className="group relative flex h-[34px] items-center justify-center overflow-hidden border border-l-0 border-black bg-white px-3 text-[11px] leading-none font-medium text-black uppercase md:hidden"

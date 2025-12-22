@@ -11,12 +11,12 @@ import {
 
 interface MobileMenuProps {
     children: React.ReactNode;
-    user: User | null;
+    user: User | undefined;
     handleCreateEventClick: () => void;
     handleSignOut: () => void;
 }
 
-const MobileMenu = memo(
+export const MobileMenu = memo(
     ({
         children,
         user,
@@ -103,6 +103,4 @@ const MobileMenu = memo(
     },
 );
 
-MobileMenu.displayName = 'MobileMenu';
 
-export { MobileMenu };
