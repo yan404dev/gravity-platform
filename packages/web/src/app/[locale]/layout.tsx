@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/shared/i18n/routing';
+import { QueryProvider } from '@/shared/providers/query-provider';
 
 const font = Host_Grotesk({ subsets: ['latin'] });
 
@@ -35,11 +36,13 @@ export default async function RootLayout({
         <html lang={locale}>
             <body className={`${font.className} antialiased`}>
                 <NextIntlClientProvider messages={messages}>
-                    <TooltipProvider>
-                        {children}
-                        <Toaster />
-                        <UIToaster />
-                    </TooltipProvider>
+                    <QueryProvider>
+                        <TooltipProvider>
+                            {children}
+                            <Toaster />
+                            <UIToaster />
+                        </TooltipProvider>
+                    </QueryProvider>
                 </NextIntlClientProvider>
             </body>
         </html>

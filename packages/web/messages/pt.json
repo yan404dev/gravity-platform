@@ -56,5 +56,48 @@
         "location": "LOCALIZAÇÃO",
         "getDirections": "COMO CHEGAR",
         "live": "AO VIVO"
+    },
+    "AuthSheet": {
+        "title": {
+            "create": "Criar Conta",
+            "signIn": "Entrar"
+        },
+        "description": {
+            "create": "Junte-se a nós para criar e gerenciar seus eventos",
+            "signIn": "Bem-vindo de volta! Faça login para continuar"
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "seu@email.com",
+            "error": "Endereço de email inválido"
+        },
+        "password": {
+            "label": "Senha",
+            "placeholder": "••••••••",
+            "error": "A senha deve ter pelo menos 6 caracteres"
+        },
+        "submit": {
+            "create": "Criar Conta",
+            "signIn": "Entrar",
+            "loading": "Aguarde..."
+        },
+        "toggle": {
+            "toSignIn": "Já tem uma conta? Entrar",
+            "toCreate": "Não tem uma conta? Crie uma"
+        },
+        "success": {
+            "signIn": {
+                "title": "Bem-vindo de volta!",
+                "description": "Você entrou com sucesso."
+            },
+            "create": {
+                "title": "Conta criada!",
+                "description": "Agora você pode entrar com suas credenciais."
+            }
+        },
+        "name": {
+            "label": "Nome",
+            "placeholder": "Seu nome"
+        }
     }
 }

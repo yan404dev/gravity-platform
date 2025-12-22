@@ -1,10 +1,12 @@
 import { z } from 'zod';
 
-export const authSchema = z.object({
-    email: z.string().email({ message: 'Invalid email address' }),
-    password: z
-        .string()
-        .min(6, { message: 'Password must be at least 6 characters' }),
-});
+export const createAuthSchema = (t: (key: string) => string) =>
+    z.object({
+        email: z.string().email({ message: t('email.error') }),
+        password: z
+            .string()
+            .min(6, { message: t('password.error') }),
+        name: z.string().optional(),
+    });
 
-export type AuthFormData = z.infer<typeof authSchema>;
+export type AuthFormData = z.infer<ReturnType<typeof createAuthSchema>>;

@@ -1,66 +1,84 @@
-import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { useAuthSheet } from './use-auth-sheet';
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetDescription,
+} from '@/shared/components/ui/sheet';
 
 interface AuthSheetProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-export const AuthSheet: React.FC<AuthSheetProps> = ({ isOpen, onClose }) => {
+export const AuthSheet = ({ isOpen, onClose }: AuthSheetProps) => {
+    const t = useTranslations('AuthSheet');
     const { isSignUp, loading, register, errors, handleSubmit, toggleMode } =
         useAuthSheet(onClose);
 
-    if (!isOpen || typeof window === 'undefined') return null;
-
-    return createPortal(
-        <>
-            <div
-                className="fixed inset-0 z-[1000] bg-black opacity-50"
-                onClick={onClose}
-            />
-
-            <div
-                className={`fixed top-0 right-0 z-[1001] h-full w-full max-w-md bg-[#1A1A1A] shadow-2xl transition-transform duration-300 ${isOpen ? 'animate-slide-in-right' : ''}`}
-            >
-                <button
-                    onClick={onClose}
-                    className="absolute top-8 right-8 text-white transition-colors hover:text-gray-300"
-                >
-                    <X size={24} />
-                </button>
-
+    return (
+        <Sheet open={isOpen} onOpenChange={onClose}>
+            <SheetContent className="w-full max-w-md bg-[#1A1A1A] p-0 border-l border-white/10 sm:max-w-md">
                 <div className="flex h-full flex-col px-10 pt-24 pb-10">
-                    <h2 className="mb-2 text-4xl font-medium text-white">
-                        {isSignUp ? 'Create Account' : 'Sign In'}
-                    </h2>
-                    <p className="mb-8 text-sm text-gray-400">
-                        {isSignUp
-                            ? 'Join us to create and manage your events'
-                            : 'Welcome back! Please sign in to continue'}
-                    </p>
+                    <SheetHeader className="mb-8 text-left">
+                        <SheetTitle className="mb-2 text-4xl font-medium text-white">
+                            {isSignUp ? t('title.create') : t('title.signIn')}
+                        </SheetTitle>
+                        <SheetDescription className="text-sm text-gray-400">
+                            {isSignUp
+                                ? t('description.create')
+                                : t('description.signIn')}
+                        </SheetDescription>
+                    </SheetHeader>
 
                     <form
                         onSubmit={handleSubmit}
                         className="flex flex-col gap-6"
                     >
+                        {isSignUp && (
+                            <div>
+                                <label
+                                    htmlFor="name"
+                                    className="mb-2 block text-sm font-medium tracking-wide text-white uppercase"
+                                >
+                                    {t('name.label')}
+                                </label>
+                                <input
+                                    id="name"
+                                    type="text"
+                                    {...register('name')}
+                                    className="w-full border border-white/20 bg-white/10 px-4 py-3 text-white transition-colors focus:border-[#FA76FF] focus:outline-none"
+                                    placeholder={t('name.placeholder')}
+                                />
+                                {errors.name && (
+                                    <p className="mt-1 text-xs text-red-500">
+                                        {errors.name.message}
+                                    </p>
+                                )}
+                            </div>
+                        )}
+
                         <div>
                             <label
                                 htmlFor="email"
                                 className="mb-2 block text-sm font-medium tracking-wide text-white uppercase"
                             >
-                                Email
+                                {t('email.label')}
                             </label>
                             <input
                                 id="email"
                                 type="email"
                                 {...register('email')}
                                 className="w-full border border-white/20 bg-white/10 px-4 py-3 text-white transition-colors focus:border-[#FA76FF] focus:outline-none"
-                                placeholder="your@email.com"
+                                placeholder={t('email.placeholder')}
                             />
                             {errors.email && (
                                 <p className="mt-1 text-xs text-red-500">
-                                    {errors.email.message}
+                                    {t('email.error')}
                                 </p>
                             )}
                         </div>
@@ -70,18 +88,18 @@ export const AuthSheet: React.FC<AuthSheetProps> = ({ isOpen, onClose }) => {
                                 htmlFor="password"
                                 className="mb-2 block text-sm font-medium tracking-wide text-white uppercase"
                             >
-                                Password
+                                {t('password.label')}
                             </label>
                             <input
                                 id="password"
                                 type="password"
                                 {...register('password')}
                                 className="w-full border border-white/20 bg-white/10 px-4 py-3 text-white transition-colors focus:border-[#FA76FF] focus:outline-none"
-                                placeholder="••••••••"
+                                placeholder={t('password.placeholder')}
                             />
                             {errors.password && (
                                 <p className="mt-1 text-xs text-red-500">
-                                    {errors.password.message}
+                                    {t('password.error')}
                                 </p>
                             )}
                         </div>
@@ -92,10 +110,10 @@ export const AuthSheet: React.FC<AuthSheetProps> = ({ isOpen, onClose }) => {
                             className="w-full border border-black bg-[#FA76FF] px-6 py-3 text-sm font-medium text-black uppercase transition-colors hover:bg-[#ff8fff] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {loading
-                                ? 'Please wait...'
+                                ? t('submit.loading')
                                 : isSignUp
-                                  ? 'Create Account'
-                                  : 'Sign In'}
+                                    ? t('submit.create')
+                                    : t('submit.signIn')}
                         </button>
                     </form>
 
@@ -105,13 +123,12 @@ export const AuthSheet: React.FC<AuthSheetProps> = ({ isOpen, onClose }) => {
                             className="text-sm text-gray-400 transition-colors hover:text-white"
                         >
                             {isSignUp
-                                ? 'Already have an account? Sign in'
-                                : "Don't have an account? Create one"}
+                                ? t('toggle.toSignIn')
+                                : t('toggle.toCreate')}
                         </button>
                     </div>
                 </div>
-            </div>
-        </>,
-        document.body,
+            </SheetContent>
+        </Sheet>
     );
 };
