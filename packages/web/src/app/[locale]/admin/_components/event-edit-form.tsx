@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/shared/components/ui/button';
+import { Input } from '@/shared/components/ui/input';
+import { Textarea } from '@/shared/components/ui/textarea';
 import { Event } from '../../(home)/_types/event';
-import { User } from '@/lib/mock-data';
+import { User } from '@/shared/lib/mock-data';
 import { useEventEditForm } from '../_hooks/use-admin-dashboard';
 
 interface EventEditFormProps {

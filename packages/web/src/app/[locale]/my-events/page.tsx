@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
-import { SEOHead } from '@/components/seo-head';
+import { SEOHead } from '@/shared/components/seo-head';
 import { MyEventsList } from './_components/my-events-list';
-import { MOCK_USER, MOCK_EVENTS } from '@/lib/mock-data';
+import { MOCK_USER, MOCK_EVENTS } from '@/shared/lib/mock-data';
 import { Event } from '../(home)/_types/event';
 
 export const revalidate = 0;

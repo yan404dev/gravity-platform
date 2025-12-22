@@ -1,9 +1,9 @@
 'use client';
 
-import { Navbar } from '@/components/navbar';
+import { Navbar } from '@/shared/components/navbar';
 import { Event } from '../../(home)/_types/event';
 import { EventEditForm } from './event-edit-form';
-import { User } from '@/lib/mock-data';
+import { User } from '@/shared/lib/mock-data';
 import { useAdminDashboard } from '../_hooks/use-admin-dashboard';
 
 interface AdminDashboardProps {

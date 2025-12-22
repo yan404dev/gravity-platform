@@ -1,13 +1,13 @@
 'use client';
 
 import { useEditEvent } from '../_hooks/use-edit-event';
-import { Registrant } from '@/types/event.types';
-import { User } from '@/lib/mock-data';
-import { Navbar } from '@/components/navbar';
+import { Registrant } from '@/shared/types/event.types';
+import { User } from '@/shared/lib/mock-data';
+import { Navbar } from '@/shared/components/navbar';
 import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { Trash2 } from 'lucide-react';
-import { EventForm } from '@/components/event-form/event-form';
+import { EventForm } from '@/shared/components/event-form/event-form';
 import { Event } from '../../(home)/_types/event';
 
 interface EditEventFormProps {

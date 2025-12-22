@@ -1,6 +1,6 @@
-import { SEOHead } from '@/components/seo-head';
+import { SEOHead } from '@/shared/components/seo-head';
 import { DiscoverView } from './_components/discover-view';
-import { MOCK_EVENTS } from '@/lib/mock-data';
+import { MOCK_EVENTS } from '@/shared/lib/mock-data';
 import { Event } from './_types/event';
 
 export const revalidate = 0; // Ensure fresh data on every request, or set to 60 for caching

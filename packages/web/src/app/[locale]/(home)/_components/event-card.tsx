@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from '@/shared/i18n/routing';
 import { Event } from '../_types/event';
 import { useTranslations } from 'next-intl';
 import React from 'react';

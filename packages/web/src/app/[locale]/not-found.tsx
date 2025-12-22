@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { SEOHead } from '@/components/seo-head';
+import { SEOHead } from '@/shared/components/seo-head';
 
 export default function NotFound() {
     const pathname = usePathname();

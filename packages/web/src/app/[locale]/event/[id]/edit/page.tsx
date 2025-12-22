@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { EditEventForm } from '../../_components/edit-event-form';
-import { SEOHead } from '@/components/seo-head';
-import { MOCK_EVENTS, MOCK_USER } from '@/lib/mock-data';
+import { SEOHead } from '@/shared/components/seo-head';
+import { MOCK_EVENTS, MOCK_USER } from '@/shared/lib/mock-data';
 import { Event } from '../../../(home)/_types/event';
 
 interface PageProps {

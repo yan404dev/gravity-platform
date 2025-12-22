@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { Host_Grotesk } from 'next/font/google';
 import './globals.css';
-import { Toaster } from '@/components/ui/sonner';
-import { Toaster as UIToaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/shared/components/ui/sonner';
+import { Toaster as UIToaster } from '@/shared/components/ui/toaster';
+import { TooltipProvider } from '@/shared/components/ui/tooltip';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
+import { routing } from '@/shared/i18n/routing';
 
 const font = Host_Grotesk({ subsets: ['latin'] });
 

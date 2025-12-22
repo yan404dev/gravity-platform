@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from '@/shared/i18n/routing';
 import { Trash2 } from 'lucide-react';
 import { Event } from '../../(home)/_types/event';
 

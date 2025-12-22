@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { User } from '@/lib/mock-data';
+import { User } from '@/shared/lib/mock-data';
 import { toast } from 'sonner';
 
 interface UseEventViewProps {

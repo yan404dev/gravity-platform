@@ -1,6 +1,6 @@
 'use client';
 
-import { SEOHead } from '@/components/seo-head';
+import { SEOHead } from '@/shared/components/seo-head';
 import { AdminDashboard } from './_components/admin-dashboard';
 import { useAdminPage } from './_hooks/use-admin-page';
 

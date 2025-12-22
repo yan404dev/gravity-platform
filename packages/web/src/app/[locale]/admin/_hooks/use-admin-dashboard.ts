@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { User, MOCK_EVENTS } from '@/lib/mock-data';
-import { useToast } from '@/hooks/use-toast';
+import { User, MOCK_EVENTS } from '@/shared/lib/mock-data';
+import { useToast } from '@/shared/hooks/use-toast';
 import { Event } from '../../(home)/_types/event';
 import {
     EventEditFormData,

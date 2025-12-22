@@ -1,8 +1,8 @@
 import { EventView } from '../_components/event-view';
-import { SEOHead } from '@/components/seo-head';
-import { Navbar } from '@/components/navbar';
-import { Link } from '@/i18n/routing';
-import { MOCK_EVENTS, MOCK_USER } from '@/lib/mock-data';
+import { SEOHead } from '@/shared/components/seo-head';
+import { Navbar } from '@/shared/components/navbar';
+import { Link } from '@/shared/i18n/routing';
+import { MOCK_EVENTS, MOCK_USER } from '@/shared/lib/mock-data';
 import { Event } from '../../(home)/_types/event';
 
 interface PageProps {

@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useMemo, useCallback } from 'react';
-import { Navbar } from '@/components/navbar';
-import { Calendar } from '@/components/ui/calendar';
+import { Navbar } from '@/shared/components/navbar';
+import { Calendar } from '@/shared/components/ui/calendar';
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from '@/components/ui/popover';
+} from '@/shared/components/ui/popover';
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { useDiscover } from '../_hooks/use-discover';
 import { EventCard } from './event-card';
 import { Event } from '../_types/event';
@@ -19,7 +19,7 @@ import { useTranslations } from 'next-intl';
 
 const EventsCarousel = dynamic(
     () =>
-        import('@/components/events-carousel').then(
+        import('@/shared/components/events-carousel').then(
             (mod) => mod.EventsCarousel,
         ),
     {
