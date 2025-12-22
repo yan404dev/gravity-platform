@@ -9,8 +9,7 @@
         "myEvents": "My Events",
         "admin": "Admin",
         "signIn": "Sign In",
-        "signOut": "Sign Out",
-        "signOutSuccess": "Signed out successfully"
+        "signOut": "Sign Out"
     },
     "Discover": {
         "browse": "BROWSE",

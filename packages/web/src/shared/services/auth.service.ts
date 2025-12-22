@@ -1,10 +1,14 @@
 import { User, LoginResponse } from '../entities/user.entity';
 import { AuthFormData } from '../components/auth-sheet/auth.schema';
 import { api } from './http.service';
+import { storageService } from './storage.service';
 
 export const authService = {
   async login(credentials: any): Promise<LoginResponse> {
     const { data } = await api.post<LoginResponse>('/auth/login', credentials);
+    if (data.access_token) {
+      storageService.setToken(data.access_token);
+    }
     return data;
   },
 
@@ -19,6 +23,11 @@ export const authService = {
   },
 
   async logout(): Promise<void> {
-    await api.post('/auth/logout');
+    storageService.removeToken();
+    try {
+      await api.post('/auth/logout');
+    } catch (error) {
+      // Ignore errors during backend logout, ensuring client cleanup
+    }
   }
 }
