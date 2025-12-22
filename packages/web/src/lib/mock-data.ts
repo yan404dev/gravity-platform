@@ -10,6 +10,8 @@ export const MOCK_USER: User = {
     id: 'mock-user-id',
     email: 'user@example.com',
     displayName: 'John Doe',
+    avatarUrl:
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     role: 'user',
 };
 

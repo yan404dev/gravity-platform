@@ -27,13 +27,11 @@ export function useAdminDashboard({
     const { toast } = useToast();
 
     const handleSignOut = async () => {
-        // TODO: Implementar logout real
         console.log('Sign out clicked');
         window.location.href = '/';
     };
 
     const refreshEvents = async () => {
-        // Mock refresh
         await new Promise((resolve) => setTimeout(resolve, 500));
         setEvents(MOCK_EVENTS as unknown as Event[]);
     };
@@ -66,9 +64,7 @@ export function useEventEditForm({
         resolver: zodResolver(eventEditSchema),
         defaultValues: {
             title: event.title,
-            // @ts-ignore
             creator: (event as any).creator || '',
-            // @ts-ignore
             description: (event as any).description || '',
             date: event.date,
             time: event.time,
@@ -95,7 +91,6 @@ export function useEventEditForm({
 
         setUploading(true);
         try {
-            // TODO: Implementar upload real
             console.log('Mock: Uploading admin image', file.name);
             await new Promise((resolve) => setTimeout(resolve, 1000));
             const publicUrl =
@@ -116,7 +111,6 @@ export function useEventEditForm({
 
     const onSubmit = async (data: EventEditFormData) => {
         try {
-            // TODO: Implementar save real
             console.log('Mock: Updating event', event.id, data);
             await new Promise((resolve) => setTimeout(resolve, 500));
 

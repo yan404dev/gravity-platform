@@ -58,7 +58,7 @@ export function DiscoverView({ initialEvents }: DiscoverViewProps) {
                 <Navbar />
             </div>
 
-            {/* Hero Section */}
+            {/*  */}
             <section className="px-4 pt-32 pb-6 md:px-8 md:pt-40 md:pb-16 lg:pt-48 lg:pb-24">
                 <div className="mx-auto max-w-4xl text-center">
                     <h1
@@ -128,7 +128,6 @@ export function DiscoverView({ initialEvents }: DiscoverViewProps) {
                 className="px-4 pt-6 pb-16 md:px-8 md:pt-16"
             >
                 <div>
-                    {/* Controls: Country & Date Picker (Mobile) */}
                     <div
                         className="animate-fade-in mb-6 flex flex-wrap items-center gap-0 md:mb-8"
                         style={{
@@ -178,7 +177,6 @@ export function DiscoverView({ initialEvents }: DiscoverViewProps) {
                     </div>
 
                     <div className="mt-8 grid grid-cols-1 gap-8 md:mt-16 lg:grid-cols-[280px_1fr] lg:gap-12">
-                        {/* Desktop Calendar */}
                         <div
                             className="animate-fade-in hidden self-start lg:sticky lg:top-24 lg:block"
                             style={{
@@ -193,8 +191,6 @@ export function DiscoverView({ initialEvents }: DiscoverViewProps) {
                                 className="mx-auto"
                             />
                         </div>
-
-                        {/* Events Grid */}
                         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-start-2 lg:grid-cols-3">
                             {filteredEvents.length === 0 ? (
                                 <div className="col-span-full py-12 text-center">

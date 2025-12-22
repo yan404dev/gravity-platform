@@ -27,7 +27,6 @@ export const useAuthSheet = (onClose: () => void) => {
         setLoading(true);
 
         try {
-            // TODO: Implementar chamada real à API
             console.log('Auth submit:', { isSignUp, ...data });
 
             if (isSignUp) {

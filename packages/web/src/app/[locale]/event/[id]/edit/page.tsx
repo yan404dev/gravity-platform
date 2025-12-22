@@ -8,37 +8,30 @@ interface PageProps {
     params: Promise<{ id: string }>;
 }
 
-export const revalidate = 0; // Dynamic for auth/ownership checks
+export const revalidate = 0;
 
 export default async function EditEventPage({ params }: PageProps) {
     const { id } = await params;
 
-    // 1. Auth Check - Mocked
     const user = MOCK_USER;
 
     if (!user) {
         redirect('/');
     }
 
-    // 2. Data Fetching (Mock)
     const event = MOCK_EVENTS.find((e) => e.id === id) as unknown as Event;
 
-    // Mock registrants and owner check
     const registrants: any[] = [];
-    const isOwner = true; // Always owner in mock mode
+    const isOwner = true;
 
-    // 3. Validation
     if (!event) {
-        // Could redirect to 404 or show error
         redirect('/my-events?error=event_not_found');
     }
 
     if (!isOwner) {
-        // Unauthorized to edit
-        redirect('/my-events?error=unauthorized');
+        redirect('/my-events?unauthorized');
     }
 
-    // 4. Render Client Component
     return (
         <>
             <SEOHead

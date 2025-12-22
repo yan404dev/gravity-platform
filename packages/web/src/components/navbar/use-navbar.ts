@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { User, MOCK_USER } from '@/lib/mock-data';
 
 export const useNavbar = () => {
-    // Mock: sempre retorna usuário logado
     const [user] = useState<User | null>(MOCK_USER);
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,7 +13,6 @@ export const useNavbar = () => {
     useEffect(() => setMounted(true), []);
 
     const handleSignOut = async () => {
-        // TODO: Implementar logout real
         console.log('Sign out clicked');
         setIsMobileMenuOpen(false);
     };

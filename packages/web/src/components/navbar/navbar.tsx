@@ -10,6 +10,7 @@ import { LanguageSwitcher } from '../language-switcher';
 import { MobileMenu } from './mobile-menu';
 
 import { useTranslations } from 'next-intl';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const Navbar: React.FC = () => {
     const t = useTranslations('Navbar');
@@ -35,9 +36,7 @@ export const Navbar: React.FC = () => {
     return createPortal(
         <>
             <nav className="fixed top-8 right-4 left-4 z-[2000] flex items-center justify-between md:right-8 md:left-8">
-                {/* Left side - Logo and menu */}
                 <div className="flex items-center gap-0">
-                    {/* Logo */}
                     <div className="flex h-[34px] w-[34px] items-center justify-center border border-black bg-black text-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -121,8 +120,24 @@ export const Navbar: React.FC = () => {
                     </button>
                 </div>
 
-                {/* Right side - Language Switcher */}
-                <LanguageSwitcher />
+                <div className="flex items-center gap-3">
+                    <LanguageSwitcher />
+
+                    {user && (
+                        <Avatar className="h-9 w-9 border border-white/20 transition-opacity hover:opacity-80">
+                            <AvatarImage
+                                src={user.avatarUrl}
+                                alt={user.displayName || user.email}
+                                className="object-cover"
+                            />
+                            <AvatarFallback className="bg-[#1A1A1A] text-xs font-medium text-white uppercase">
+                                {user.displayName
+                                    ? user.displayName.substring(0, 2)
+                                    : user.email.substring(0, 2)}
+                            </AvatarFallback>
+                        </Avatar>
+                    )}
+                </div>
 
                 <MobileMenu
                     isOpen={isMobileMenuOpen}

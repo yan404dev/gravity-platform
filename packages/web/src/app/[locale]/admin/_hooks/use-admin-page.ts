@@ -11,9 +11,7 @@ export function useAdminPage() {
 
     useEffect(() => {
         const loadData = async () => {
-            // Mock: sempre retorna usuário admin
             setUser(MOCK_USER);
-            // Simulate fetch delay
             await new Promise((resolve) => setTimeout(resolve, 500));
             setEvents(MOCK_EVENTS as unknown as Event[]);
             setIsLoading(false);

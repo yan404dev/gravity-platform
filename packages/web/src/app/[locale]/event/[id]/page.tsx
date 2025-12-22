@@ -9,7 +9,7 @@ interface PageProps {
     params: Promise<{ id: string }>;
 }
 
-export const revalidate = 0; // Dynamic for auth check
+export const revalidate = 0;
 
 export default async function EventPage({ params }: PageProps) {
     const { id } = await params;
@@ -46,8 +46,7 @@ export default async function EventPage({ params }: PageProps) {
     let isRegistered = false;
 
     if (user) {
-        // Mock registration check
-        isRegistered = false; // Could check a mock registrations array
+        isRegistered = false;
     }
 
     return (

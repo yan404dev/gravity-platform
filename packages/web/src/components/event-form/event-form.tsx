@@ -262,7 +262,6 @@ export function EventForm({
                                         locationInputRef &&
                                         'current' in locationInputRef
                                     ) {
-                                        // @ts-ignore
                                         locationInputRef.current = e;
                                     }
                                 },
