@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from '@/shared/i18n/routing';
 import { Trash2 } from 'lucide-react';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface EventCardProps {
     event: Event;
@@ -80,7 +80,7 @@ export const EventCard = React.memo(
             prevProps.event.date === nextProps.event.date &&
             prevProps.event.time === nextProps.event.time &&
             prevProps.event.background_image_url ===
-                nextProps.event.background_image_url &&
+            nextProps.event.background_image_url &&
             prevProps.isCreated === nextProps.isCreated &&
             prevProps.onDelete === nextProps.onDelete
         ); // Assuming onDelete is stable or we want to re-render if it changes

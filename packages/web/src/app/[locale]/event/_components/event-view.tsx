@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import { User } from '@/lib/mock-data';
-import { Navbar } from '@/components/navbar';
-import { EventMeta } from '@/components/event-meta';
+import { User } from '@/shared/lib/mock-data';
+import { Navbar } from '@/shared/components/navbar';
+import { EventMeta } from '@/shared/components/event-meta';
 import dynamic from 'next/dynamic';
 
 const EventCountdown = dynamic(
     () =>
-        import('@/components/event-countdown').then(
+        import('@/shared/components/event-countdown').then(
             (mod) => mod.EventCountdown,
         ),
     {
@@ -18,14 +18,14 @@ const EventCountdown = dynamic(
         ),
     },
 );
-import { EventHeader } from '@/components/event-header';
-import { EventDescription } from '@/components/event-description';
-import { EventLocation } from '@/components/event-location';
-import { EventRegistration } from '@/components/event-registration';
-import { AuthSheet } from '@/components/auth-sheet';
-import { SEOHead } from '@/components/seo-head';
+import { EventHeader } from '@/shared/components/event-header';
+import { EventDescription } from '@/shared/components/event-description';
+import { EventLocation } from '@/shared/components/event-location';
+import { EventRegistration } from '@/shared/components/event-registration';
+import { AuthSheet } from '@/shared/components/auth-sheet';
+import { SEOHead } from '@/shared/components/seo-head';
 import { useEventView } from '../_hooks/use-event-view';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface EventViewProps {
     event: Event;

@@ -1,15 +1,15 @@
 import { EventView } from '../_components/event-view';
-import { SEOHead } from '@/components/seo-head';
-import { Navbar } from '@/components/navbar';
-import { Link } from '@/i18n/routing';
-import { MOCK_EVENTS, MOCK_USER } from '@/lib/mock-data';
-import { Event } from '../../_types/event';
+import { SEOHead } from '@/shared/components/seo-head';
+import { Navbar } from '@/shared/components/navbar';
+import { Link } from '@/shared/i18n/routing';
+import { MOCK_EVENTS, MOCK_USER } from '@/shared/lib/mock-data';
+import { Event } from '../../(home)/_types/event';
 
 interface PageProps {
     params: Promise<{ id: string }>;
 }
 
-export const revalidate = 0; // Dynamic for auth check
+export const revalidate = 0;
 
 export default async function EventPage({ params }: PageProps) {
     const { id } = await params;
@@ -46,8 +46,7 @@ export default async function EventPage({ params }: PageProps) {
     let isRegistered = false;
 
     if (user) {
-        // Mock registration check
-        isRegistered = false; // Could check a mock registrations array
+        isRegistered = false;
     }
 
     return (

@@ -1,8 +1,8 @@
 'use client';
 
-import { Navbar } from '@/components/navbar';
-import { User } from '@/lib/mock-data';
-import { EventForm } from '@/components/event-form/event-form';
+import { Navbar } from '@/shared/components/navbar';
+import { User } from '@/shared/lib/mock-data';
+import { EventForm } from '@/shared/components/event-form/event-form';
 import { useCreateEvent } from '../_hooks/use-create-event';
 
 interface CreateEventFormProps {

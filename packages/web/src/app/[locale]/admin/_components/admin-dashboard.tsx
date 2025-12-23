@@ -1,9 +1,9 @@
 'use client';
 
-import { Navbar } from '@/components/navbar';
-import { Event } from '../../_types/event';
+import { Navbar } from '@/shared/components/navbar';
+import { Event } from '../../(home)/_types/event';
 import { EventEditForm } from './event-edit-form';
-import { User } from '@/lib/mock-data';
+import { User } from '@/shared/lib/mock-data';
 import { useAdminDashboard } from '../_hooks/use-admin-dashboard';
 
 interface AdminDashboardProps {
@@ -33,11 +33,10 @@ export function AdminDashboard({ initialEvents, user }: AdminDashboardProps) {
                             <li key={evt.id}>
                                 <button
                                     onClick={() => setSelectedEvent(evt)}
-                                    className={`w-full rounded p-2 text-left hover:bg-gray-100 ${
-                                        selectedEvent?.id === evt.id
+                                    className={`w-full rounded p-2 text-left hover:bg-gray-100 ${selectedEvent?.id === evt.id
                                             ? 'bg-gray-100 font-medium'
                                             : ''
-                                    }`}
+                                        }`}
                                 >
                                     {evt.title}
                                 </button>

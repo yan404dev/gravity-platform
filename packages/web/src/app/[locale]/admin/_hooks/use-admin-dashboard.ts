@@ -1,17 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { User, MOCK_EVENTS } from '@/lib/mock-data';
-import { useToast } from '@/hooks/use-toast';
-import { Event } from '../../_types/event';
+import { User, MOCK_EVENTS } from '@/shared/lib/mock-data';
+import { useToast } from '@/shared/hooks/use-toast';
+import { Event } from '../../(home)/_types/event';
 import {
     EventEditFormData,
     eventEditSchema,
 } from '../_schemas/event-edit.schema';
-import { authService } from '@/lib/auth-store';
 
 interface UseAdminDashboardProps {
     initialEvents: Event[];
@@ -26,16 +24,14 @@ export function useAdminDashboard({
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(
         initialEvents.length > 0 ? initialEvents[0] : null,
     );
-    const router = useRouter();
     const { toast } = useToast();
 
     const handleSignOut = async () => {
-        await authService.signOut();
+        console.log('Sign out clicked');
         window.location.href = '/';
     };
 
     const refreshEvents = async () => {
-        // Mock refresh
         await new Promise((resolve) => setTimeout(resolve, 500));
         setEvents(MOCK_EVENTS as unknown as Event[]);
     };
@@ -68,9 +64,7 @@ export function useEventEditForm({
         resolver: zodResolver(eventEditSchema),
         defaultValues: {
             title: event.title,
-            // @ts-ignore
             creator: (event as any).creator || '',
-            // @ts-ignore
             description: (event as any).description || '',
             date: event.date,
             time: event.time,
@@ -99,7 +93,6 @@ export function useEventEditForm({
         try {
             console.log('Mock: Uploading admin image', file.name);
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            // Return dummy URL
             const publicUrl =
                 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=1000';
 

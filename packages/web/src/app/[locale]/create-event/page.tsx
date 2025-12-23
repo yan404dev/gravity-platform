@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
-import { SEOHead } from '@/components/seo-head';
+import { SEOHead } from '@/shared/components/seo-head';
 import { CreateEventForm } from './_components/create-event-form';
-import { MOCK_USER } from '@/lib/mock-data';
+import { MOCK_USER } from '@/shared/lib/mock-data';
 
 export default function CreateEventPage() {
     const user = MOCK_USER;

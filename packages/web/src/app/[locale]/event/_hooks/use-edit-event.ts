@@ -4,15 +4,15 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { User } from '@/lib/mock-data';
+import { User } from '@/shared/lib/mock-data';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
-import { useGooglePlacesAutocomplete } from '@/hooks/useGooglePlacesAutocomplete';
+import { useGooglePlacesAutocomplete } from '@/shared/hooks/useGooglePlacesAutocomplete';
 import {
     EditEventFormData,
     editEventSchema,
 } from '../_schemas/edit-event.schema';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface UseEditEventProps {
     event: Event;

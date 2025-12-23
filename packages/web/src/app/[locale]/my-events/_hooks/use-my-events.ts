@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { User, MOCK_EVENTS } from '@/lib/mock-data';
+import { User, MOCK_EVENTS } from '@/shared/lib/mock-data';
 import { toast } from 'sonner';
-import { Event } from '../../_types/event';
+import { Event } from '../../(home)/_types/event';
 
 interface MyEventsState {
     createdEvents: Event[];

@@ -56,5 +56,48 @@
         "location": "LOCATION",
         "getDirections": "GET DIRECTIONS",
         "live": "LIVE"
+    },
+    "AuthSheet": {
+        "title": {
+            "create": "Create Account",
+            "signIn": "Sign In"
+        },
+        "description": {
+            "create": "Join us to create and manage your events",
+            "signIn": "Welcome back! Please sign in to continue"
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "your@email.com",
+            "error": "Invalid email address"
+        },
+        "password": {
+            "label": "Password",
+            "placeholder": "••••••••",
+            "error": "Password must be at least 6 characters"
+        },
+        "submit": {
+            "create": "Create Account",
+            "signIn": "Sign In",
+            "loading": "Please wait..."
+        },
+        "toggle": {
+            "toSignIn": "Already have an account? Sign in",
+            "toCreate": "Don't have an account? Create one"
+        },
+        "success": {
+            "signIn": {
+                "title": "Welcome back!",
+                "description": "You have successfully signed in."
+            },
+            "create": {
+                "title": "Account created!",
+                "description": "You can now sign in with your credentials."
+            }
+        },
+        "name": {
+            "label": "Name",
+            "placeholder": "Your name"
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { EventFormData } from '@/types/event-form.types';
+import { EventFormData } from '@/shared/types/event-form.types';
 
 export const createEventSchema = z.object({
     eventName: z.string().min(1, 'Event name is required'),

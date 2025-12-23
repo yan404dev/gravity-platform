@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { User } from '@/lib/mock-data';
-import { useGooglePlacesAutocomplete } from '@/hooks/useGooglePlacesAutocomplete';
+import { User } from '@/shared/lib/mock-data';
+import { useGooglePlacesAutocomplete } from '@/shared/hooks/useGooglePlacesAutocomplete';
 import {
     CreateEventFormData,
     createEventSchema,

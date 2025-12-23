@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Navbar } from '@/components/navbar';
+import { Navbar } from '@/shared/components/navbar';
 import { useMyEvents } from '../_hooks/use-my-events';
 import { useSlidingTabs } from '../_hooks/use-sliding-tabs';
-import { Event } from '../../_types/event';
-import { User } from '@/lib/mock-data';
+import { Event } from '../../(home)/_types/event';
+import { User } from '@/shared/lib/mock-data';
 import { EventCard } from './event-card';
 
 interface MyEventsListProps {

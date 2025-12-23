@@ -56,5 +56,48 @@
         "location": "UBICACIÓN",
         "getDirections": "CÓMO LLEGAR",
         "live": "EN VIVO"
+    },
+    "AuthSheet": {
+        "title": {
+            "create": "Crear Cuenta",
+            "signIn": "Iniciar Sesión"
+        },
+        "description": {
+            "create": "Únete a nosotros para crear y administrar tus eventos",
+            "signIn": "¡Bienvenido de nuevo! Inicia sesión para continuar"
+        },
+        "email": {
+            "label": "Correo",
+            "placeholder": "tu@email.com",
+            "error": "Dirección de correo inválida"
+        },
+        "password": {
+            "label": "Contraseña",
+            "placeholder": "••••••••",
+            "error": "La contraseña debe tener al menos 6 caracteres"
+        },
+        "submit": {
+            "create": "Crear Cuenta",
+            "signIn": "Iniciar Sesión",
+            "loading": "Por favor espera..."
+        },
+        "toggle": {
+            "toSignIn": "¿Ya tienes una cuenta? Iniciar sesión",
+            "toCreate": "¿No tienes una cuenta? Crea una"
+        },
+        "success": {
+            "signIn": {
+                "title": "¡Bienvenido de nuevo!",
+                "description": "Has iniciado sesión exitosamente."
+            },
+            "create": {
+                "title": "¡Cuenta creada!",
+                "description": "Ahora puedes iniciar sesión con tus credenciales."
+            }
+        },
+        "name": {
+            "label": "Nombre",
+            "placeholder": "Tu nombre"
+        }
     }
 }
