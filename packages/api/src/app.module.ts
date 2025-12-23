@@ -4,6 +4,7 @@ import { PrismaModule } from '@/prisma';
 import { SharedModule } from './modules/shared/shared.module';
 import { UsersModule } from './modules/users/users.module';
 import { QueryBuilderModule } from '@/query-builder';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { QueryBuilderModule } from '@/query-builder';
     QueryBuilderModule.forRoot(),
     SharedModule,
     UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

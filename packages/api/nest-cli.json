@@ -25,6 +25,15 @@
         "tsConfigPath": "libs/bcrypt/tsconfig.lib.json"
       }
     },
+    "jsonwebtoken": {
+      "type": "library",
+      "root": "libs/jsonwebtoken",
+      "entryFile": "index",
+      "sourceRoot": "libs/jsonwebtoken/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/jsonwebtoken/tsconfig.lib.json"
+      }
+    },
     "prisma": {
       "type": "library",
       "root": "libs/prisma",

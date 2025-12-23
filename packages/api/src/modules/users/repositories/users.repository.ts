@@ -7,6 +7,7 @@ import {
   UserWithoutPasswordEntity,
   userWithoutPasswordSelectedFields,
   UserWithProfileEntity,
+  UserWithoutPasswordWithProfileEntity,
 } from 'src/domain/entities';
 
 @Injectable()
@@ -81,6 +82,19 @@ export class UsersRepository {
       where: {
         id,
         deletedAt: null,
+      },
+    });
+  }
+
+  getByIdWithCurrentProfile(id: number): Promise<UserWithoutPasswordWithProfileEntity | null> {
+    return this.prismaService.user.findFirst({
+      where: {
+        id,
+        deletedAt: null,
+      },
+      select: {
+        ...userWithoutPasswordSelectedFields,
+        currentProfile: true,
       },
     });
   }

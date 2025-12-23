@@ -11,6 +11,7 @@ import {
   UserEntity,
   UserWithoutPasswordEntity,
   UserWithoutPasswordWithProfileEntity,
+  UserWithProfileEntity,
 } from 'src/domain/entities';
 
 @Injectable()
@@ -90,7 +91,7 @@ export class UsersService {
     return { data, info };
   }
 
-  async findByEmail(email: string): Promise<UserEntity> {
+  async findByEmail(email: string): Promise<UserWithProfileEntity> {
     const user = await this.usersRepository.getByEmail(email);
 
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -100,6 +101,14 @@ export class UsersService {
 
   async findById(id: number): Promise<UserWithoutPasswordEntity> {
     const user = await this.usersRepository.getById(id);
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    return user;
+  }
+
+  async findByIdWithCurrentProfile(id: number): Promise<UserWithoutPasswordWithProfileEntity> {
+    const user = await this.usersRepository.getByIdWithCurrentProfile(id);
 
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
 

@@ -13,6 +13,7 @@
   "moduleNameMapper": {
     "^@/als(|/.*)$": "<rootDir>/../libs/als/src/$1",
     "^@/bcrypt(|/.*)$": "<rootDir>/../libs/bcrypt/src/$1",
+    "^@/jsonwebtoken(|/.*)$": "<rootDir>/../libs/jsonwebtoken/src/$1",
     "^@/prisma(|/.*)$": "<rootDir>/../libs/prisma/src/$1",
     "^@/query-builder(|/.*)$": "<rootDir>/../libs/query-builder/src/$1"
   }
