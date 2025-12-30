@@ -5,6 +5,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { UsersModule } from './modules/users/users.module';
 import { QueryBuilderModule } from '@/query-builder';
 import { AuthModule } from './modules/auth/auth.module';
+import { EventsModule } from './modules/events/events.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AuthModule } from './modules/auth/auth.module';
     SharedModule,
     UsersModule,
     AuthModule,
+    EventsModule,
   ],
 })
 export class AppModule {}

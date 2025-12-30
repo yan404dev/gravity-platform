@@ -3,3 +3,4 @@ export * from './users';
 export * from './users-profiles';
 export * from './shared';
 export * from './auth';
+export * from './events';

@@ -86,7 +86,9 @@ export class UsersRepository {
     });
   }
 
-  getByIdWithCurrentProfile(id: number): Promise<UserWithoutPasswordWithProfileEntity | null> {
+  getByIdWithCurrentProfile(
+    id: number,
+  ): Promise<UserWithoutPasswordWithProfileEntity | null> {
     return this.prismaService.user.findFirst({
       where: {
         id,

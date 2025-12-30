@@ -5,6 +5,7 @@ import {
   NestModule,
 } from '@nestjs/common';
 import { MetadataMiddleware, TracingMiddleware } from './middlewares';
+import { AuthGuard } from './guards';
 
 @Module({})
 export class SharedModule implements NestModule {
@@ -16,6 +17,7 @@ export class SharedModule implements NestModule {
   static forRoot(): DynamicModule {
     return {
       module: SharedModule,
+      providers: [AuthGuard],
       global: true,
     };
   }
