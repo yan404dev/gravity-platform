@@ -16,6 +16,7 @@ import { EventsService } from '../services/events.service';
 import { CreateEventDto, QueryEventDto, UpdateEventDto } from 'src/domain/dtos';
 import { EventEntity, ResultEntity } from 'src/domain/entities';
 import { AuthGuard } from 'src/modules/shared/guards';
+import { IgnoreAllGuards } from 'src/common/decorators';
 
 @Controller('events')
 @UseGuards(AuthGuard)
@@ -28,6 +29,7 @@ export class EventsController {
   }
 
   @Get()
+  @IgnoreAllGuards()
   search(
     @Query() queryParams: QueryEventDto,
   ): Promise<ResultEntity<EventEntity>> {
@@ -35,6 +37,7 @@ export class EventsController {
   }
 
   @Get(':id')
+  @IgnoreAllGuards()
   findById(@Param('id', ParseIntPipe) id: string): Promise<EventEntity> {
     return this.eventsService.findById(+id);
   }
