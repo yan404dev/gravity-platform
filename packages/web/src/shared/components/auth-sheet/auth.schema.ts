@@ -6,7 +6,9 @@ export const createAuthSchema = (t: (key: string) => string) =>
         password: z
             .string()
             .min(6, { message: t('password.error') }),
-        name: z.string().optional(),
+        profile: z.object({
+            name: z.string().min(1, { message: t('name.error') || 'Name is required' }),
+        }),
     });
 
 export type AuthFormData = z.infer<ReturnType<typeof createAuthSchema>>;

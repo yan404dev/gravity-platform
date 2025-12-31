@@ -4,7 +4,7 @@ import { api } from './http.service';
 import { storageService } from './storage.service';
 
 export const authService = {
-  async login(credentials: any): Promise<LoginResponse> {
+  async login(credentials: AuthFormData): Promise<LoginResponse> {
     const { data } = await api.post<LoginResponse>('/auth/login', credentials);
     if (data.access_token) {
       storageService.setToken(data.access_token);
@@ -18,7 +18,7 @@ export const authService = {
   },
 
   async me(): Promise<User> {
-    const { data } = await api.get<User>('/auth/me');
+    const { data } = await api.get<User>('/users/@me');
     return data;
   },
 

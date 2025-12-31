@@ -21,7 +21,7 @@ export const Navbar: React.FC = () => {
     } = useNavbar();
 
     return (
-        <nav className="fixed top-8 right-4 left-4 z-[2000] flex items-center justify-between md:right-8 md:left-8">
+        <nav className="fixed top-8 right-4 left-4 z-10 flex items-center justify-between md:right-8 md:left-8">
             <div className="flex items-center gap-0">
                 <div className="flex h-[34px] w-[34px] items-center justify-center border border-black bg-black text-white">
                     <svg
