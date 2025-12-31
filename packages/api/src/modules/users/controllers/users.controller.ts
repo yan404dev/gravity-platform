@@ -40,7 +40,7 @@ export class UsersController {
   me() {
     const userId = this.alsService.getOrThrowError<number>(USER_ID_CONSTANT);
 
-    return this.usersService.findById(+userId);
+    return this.usersService.findByIdWithCurrentProfile(+userId);
   }
 
   @Get()
