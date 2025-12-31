@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { SearchUserDto, UserOnboardingDto } from 'src/domain/dtos';
@@ -18,6 +19,7 @@ import {
   UserWithoutPasswordWithProfileEntity,
 } from 'src/domain/entities';
 import { AlsService, USER_ID_CONSTANT } from '@/als';
+import { AuthGuard } from 'src/modules/shared/guards';
 
 @Controller('users')
 export class UsersController {
@@ -34,6 +36,7 @@ export class UsersController {
   }
 
   @Get('/@me')
+  @UseGuards(AuthGuard)
   me() {
     const userId = this.alsService.getOrThrowError<number>(USER_ID_CONSTANT);
 
