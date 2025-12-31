@@ -2,11 +2,10 @@ import axios from 'axios';
 import { storageService } from './storage.service';
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080',
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
