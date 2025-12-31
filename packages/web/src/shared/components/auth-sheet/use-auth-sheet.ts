@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useToast } from '@/shared/hooks/use-toast';
-import { createAuthSchema, AuthFormData } from './auth.schema';
+import { createAuthSchema, createLoginSchema, createRegisterSchema, AuthFormData, LoginFormData } from './auth.schema';
 import { authService } from '../../services/auth.service';
 
 type StringFieldPath = 'email' | 'password' | 'profile.name';
@@ -29,7 +29,7 @@ export const useAuthSheet = (onClose: () => void) => {
     const [isSignUp, setIsSignUp] = useState(false);
     const { toast } = useToast();
 
-    const authSchema = createAuthSchema(t);
+    const authSchema = isSignUp ? createRegisterSchema(t) : createLoginSchema(t);
 
     const form = useForm<AuthFormData>({
         resolver: zodResolver(authSchema),
@@ -45,28 +45,51 @@ export const useAuthSheet = (onClose: () => void) => {
     };
 
     const { mutate: login, isPending: isLoginPending } = useMutation({
-        mutationFn: (data: AuthFormData) => authService.login(data),
+        mutationFn: (data: LoginFormData) => authService.login(data),
         onSuccess: () =>
             handleSuccess(
                 t('success.signIn.title'),
                 t('success.signIn.description'),
             ),
+        onError: (error) => {
+            toast({
+                title: 'Error',
+                description: error.message,
+                variant: 'destructive',
+            });
+        },
     });
 
     const { mutate: registerUser, isPending: isRegisterPending } = useMutation({
         mutationFn: (data: AuthFormData) => authService.register(data),
-        onSuccess: () => {
-            handleSuccess(
-                t('success.create.title'),
-                t('success.create.description'),
-            );
-            setIsSignUp(false);
+        onSuccess: (_, variables) => {
+            toast({
+                title: t('success.create.title'),
+                description: t('success.create.description'),
+            });
+            login({
+                email: variables.email,
+                password: variables.password,
+            });
+        },
+        onError: (error) => {
+            toast({
+                title: 'Error',
+                description: error.message,
+                variant: 'destructive',
+            });
         },
     });
 
     const onSubmit = (data: AuthFormData) => {
-        if (isSignUp) registerUser(data);
-        else login(data);
+        if (isSignUp) {
+            return registerUser(data);
+        }
+
+
+        const { profile, ...loginData } = data;
+
+        login(loginData);
     };
 
     const toggleMode = () => setIsSignUp((prev) => !prev);

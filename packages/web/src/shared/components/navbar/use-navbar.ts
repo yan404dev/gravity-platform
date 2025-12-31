@@ -1,9 +1,12 @@
 'use client';
+
+
 import { useRouter } from 'next/navigation';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { authService } from '@/shared/services/auth.service';
 import { useToast } from '@/shared/hooks/use-toast';
+import { useUser } from '@/shared/hooks/use-user';
 
 export const useNavbar = () => {
     const t = useTranslations('Navbar');
@@ -11,11 +14,7 @@ export const useNavbar = () => {
     const queryClient = useQueryClient();
     const router = useRouter();
 
-    const { data: user } = useQuery({
-        queryKey: ['me'],
-        queryFn: authService.me,
-        retry: false,
-    });
+    const { user } = useUser();
 
     const { mutate: signOut } = useMutation({
         mutationFn: authService.logout,

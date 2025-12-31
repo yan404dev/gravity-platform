@@ -97,7 +97,8 @@
         },
         "name": {
             "label": "Nombre",
-            "placeholder": "Tu nombre"
+            "placeholder": "Tu nombre",
+            "error": "El nombre es obligatorio"
         }
     }
 }

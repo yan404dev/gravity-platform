@@ -1,10 +1,30 @@
-'use client';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { authService } from '@/shared/services/auth.service';
+import { User } from '@/shared/entities/user.entity';
 
-import { MOCK_USER, User } from '@/shared/lib/mock-data';
+export const useUser = () => {
+    const queryClient = useQueryClient();
 
-export function useUser() {
-    const user: User | null = MOCK_USER;
-    const loading = false;
+    const { data: user, isLoading, error } = useQuery<User>({
+        queryKey: ['me'],
+        queryFn: authService.me,
+        retry: 0,
+        staleTime: 1000 * 60 * 5,
+    });
 
-    return { user, loading };
-}
+    const invalidateUser = () => {
+        queryClient.invalidateQueries({ queryKey: ['me'] });
+    };
+
+    const setUser = (user: User | null) => {
+        queryClient.setQueryData(['me'], user);
+    };
+
+    return {
+        user,
+        isLoading,
+        error,
+        invalidateUser,
+        setUser,
+    };
+};

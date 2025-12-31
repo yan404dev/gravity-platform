@@ -134,7 +134,7 @@ export const Navbar: React.FC = () => {
                     <Avatar className="h-9 w-9 border border-white/20 transition-opacity hover:opacity-80">
                         <AvatarImage
                             src={undefined}
-                            alt={user.name || user.email}
+                            alt={user.email}
                             className="object-cover"
                         />
                         <AvatarFallback className="bg-[#1A1A1A] text-xs font-medium text-white uppercase">
